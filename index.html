@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Treino de Hiragana</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin: 40px; }
+    table { margin: 0 auto; border-collapse: collapse; }
+    td, th {
+      border: 1px solid #aaa;
+      padding: 10px;
+      font-size: 28px;
+      text-align: center;
+      min-width: 50px;
+    }
+    label { cursor: pointer; display: block; }
+    .kana { font-size: 120px; margin: 20px; }
+    #feedback { font-size: 20px; margin-top: 10px; height: 24px; }
+  </style>
+</head>
+<body>
+
+  <h2>Selecione os Hiragana</h2>
+
+  <div id="table-container"></div>
+
+  <button id="start">Iniciar treino</button>
+
+  <hr>
+
+  <div id="app" style="display:none;">
+    <div class="kana" id="kana"></div>
+    <input id="answer" placeholder="romanização..." autocomplete="off">
+    <p id="feedback"></p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
