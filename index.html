@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Treino de Hiragana</title>
+  <title>Treino de Japonês</title>
   <style>
     body { font-family: sans-serif; text-align: center; margin: 40px; }
     table { margin: 0 auto; border-collapse: collapse; }
@@ -16,24 +16,372 @@
     label { cursor: pointer; display: block; }
     .kana { font-size: 120px; margin: 20px; }
     #feedback { font-size: 20px; margin-top: 10px; height: 24px; }
+
+    .page { display: none; }
+    
+    .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    }
+
+    .menu button {
+    width: 250px;
+    font-size: 22px;
+    padding: 15px 30px;
+    cursor: pointer;
+    }
+
   </style>
 </head>
 <body>
 
-  <h2>Selecione os Hiragana</h2>
-
-  <div id="table-container"></div>
-
-  <button id="start">Iniciar treino</button>
-
-  <hr>
-
-  <div id="app" style="display:none;">
-    <div class="kana" id="kana"></div>
-    <input id="answer" placeholder="romanização..." autocomplete="off">
-    <p id="feedback"></p>
+  <!-- HOME -->
+  <div id="home" class="page" style="display:block;">
+    <h1>Treinos de Japonês</h1>
+    <div class="menu">
+      <button onclick="showPage('hiragana')">Hiragana</button>
+      <button onclick="showPage('katakana')">Katakana</button>
+      <button onclick="showPage('numeros')">Números (1–10)</button>
+    </div>
   </div>
 
-  <script src="app.js"></script>
+  <!-- HIRAGANA -->
+  <div id="hiragana" class="page">
+    <h2>Selecione os Hiragana</h2>
+    <div id="table-container"></div>
+    <button id="start-hira">Iniciar treino</button>
+    <hr>
+
+    <div id="app-hira" style="display:none;">
+      <div class="kana" id="kana-hira"></div>
+      <input id="answer-hira" placeholder="romanização..." autocomplete="off">
+      <p id="feedback-hira"></p>
+    </div>
+
+    <button onclick="showPage('home')">Voltar</button>
+  </div>
+
+  <!-- KATAKANA -->
+  <div id="katakana" class="page">
+    <h2>Selecione os Katakana</h2>
+    <div id="table-kata"></div>
+    <button id="start-kata">Iniciar treino</button>
+    <hr>
+
+    <div id="app-kata" style="display:none;">
+      <div class="kana" id="kana-kata"></div>
+      <input id="answer-kata" placeholder="romanização..." autocomplete="off">
+      <p id="feedback-kata"></p>
+    </div>
+
+    <button onclick="showPage('home')">Voltar</button>
+  </div>
+
+  <!-- NÚMEROS -->
+  <div id="numeros" class="page">
+    <h2>Treino de Números (1–10)</h2>
+
+    <button id="start-num">Iniciar treino</button>
+
+    <hr>
+
+    <div id="app-num" style="display:none;">
+      <div class="kana" id="kana-num"></div>
+      <input id="answer-num" placeholder="romanização..." autocomplete="off">
+      <p id="feedback-num"></p>
+    </div>
+
+    <button onclick="showPage('home')">Voltar</button>
+  </div>
+
+
+
+<script>
+// --- Controle de páginas ---
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+  document.getElementById(id).style.display = "block";
+}
+
+// ------------ TABELAS BASE (HIRAGANA E KATAKANA) -------------------
+
+const VOGAIS = ["A","I","U","E","O"];
+
+const HIRAGANA_TABLE = {
+  "":  { "A":"あ","I":"い","U":"う","E":"え","O":"お" },
+  "K": { "A":"か","I":"き","U":"く","E":"け","O":"こ" },
+  "S": { "A":"さ","I":"し","U":"す","E":"せ","O":"そ" },
+  "T": { "A":"た","I":"ち","U":"つ","E":"て","O":"と" },
+  "N": { "A":"な","I":"に","U":"ぬ","E":"ね","O":"の" },
+  "H": { "A":"は","I":"ひ","U":"ふ","E":"へ","O":"ほ" },
+  "M": { "A":"ま","I":"み","U":"む","E":"め","O":"も" },
+  "Y": { "A":"や",       "U":"ゆ",       "O":"よ" },
+  "R": { "A":"ら","I":"り","U":"る","E":"れ","O":"ろ" },
+  "W": { "A":"わ",                     "O":"を" }
+};
+
+const KATAKANA_TABLE = {
+  "":  { "A":"ア","I":"イ","U":"ウ","E":"エ","O":"オ" },
+  "K": { "A":"カ","I":"キ","U":"ク","E":"ケ","O":"コ" },
+  "S": { "A":"サ","I":"シ","U":"ス","E":"セ","O":"ソ" },
+  "T": { "A":"タ","I":"チ","U":"ツ","E":"テ","O":"ト" },
+  "N": { "A":"ナ","I":"ニ","U":"ヌ","E":"ネ","O":"ノ" },
+  "H": { "A":"ハ","I":"ヒ","U":"フ","E":"ヘ","O":"ホ" },
+  "M": { "A":"マ","I":"ミ","U":"ム","E":"メ","O":"モ" },
+  "Y": { "A":"ヤ",       "U":"ユ",       "O":"ヨ" },
+  "R": { "A":"ラ","I":"リ","U":"ル","E":"レ","O":"ロ" },
+  "W": { "A":"ワ",                     "O":"ヲ" }
+};
+
+// --- ROMAJI MAP (apenas 1 mapa para ambos) ---
+const ROMAJI_MAP = {};
+
+// Preencher com hiragana
+for (const cons in HIRAGANA_TABLE) {
+  for (const vow in HIRAGANA_TABLE[cons]) {
+    ROMAJI_MAP[HIRAGANA_TABLE[cons][vow]] = (cons + vow).toLowerCase();
+  }
+}
+// Casos especiais hiragana
+ROMAJI_MAP["し"] = "shi";
+ROMAJI_MAP["ち"] = "chi";
+ROMAJI_MAP["つ"] = "tsu";
+ROMAJI_MAP["ふ"] = "fu";
+ROMAJI_MAP["を"] = "wo";
+
+// Preencher com katakana
+for (const cons in KATAKANA_TABLE) {
+  for (const vow in KATAKANA_TABLE[cons]) {
+    ROMAJI_MAP[KATAKANA_TABLE[cons][vow]] = (cons + vow).toLowerCase();
+  }
+}
+// Casos especiais katakana
+ROMAJI_MAP["シ"] = "shi";
+ROMAJI_MAP["チ"] = "chi";
+ROMAJI_MAP["ツ"] = "tsu";
+ROMAJI_MAP["フ"] = "fu";
+ROMAJI_MAP["ヲ"] = "wo";
+
+
+
+// --- Shuffle ---
+function shuffle(array) {
+  for (let i = array.length -1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// --- Tabela de Hiragana ---
+const contHira = document.getElementById("table-container");
+const tableHira = document.createElement("table");
+
+let head = document.createElement("tr");
+head.appendChild(document.createElement("th"));
+VOGAIS.forEach(v => {
+  const th = document.createElement("th");
+  th.textContent = v;
+  head.appendChild(th);
+});
+tableHira.appendChild(head);
+
+for (const cons in HIRAGANA_TABLE) {
+  const tr = document.createElement("tr");
+  const th = document.createElement("th");
+  th.textContent = cons;
+  tr.appendChild(th);
+
+  VOGAIS.forEach(v => {
+    const td = document.createElement("td");
+    if (HIRAGANA_TABLE[cons][v]) {
+      td.innerHTML = `<label><input type="checkbox" value="${HIRAGANA_TABLE[cons][v]}"> ${HIRAGANA_TABLE[cons][v]}</label>`;
+    }
+    tr.appendChild(td);
+  });
+
+  tableHira.appendChild(tr);
+}
+contHira.appendChild(tableHira);
+
+
+// --- Tabela de Katakana ---
+const contKata = document.getElementById("table-kata");
+const tableKata = document.createElement("table");
+
+let head2 = document.createElement("tr");
+head2.appendChild(document.createElement("th"));
+VOGAIS.forEach(v => {
+  const th = document.createElement("th");
+  th.textContent = v;
+  head2.appendChild(th);
+});
+tableKata.appendChild(head2);
+
+for (const cons in KATAKANA_TABLE) {
+  const tr = document.createElement("tr");
+  const th = document.createElement("th");
+  th.textContent = cons;
+  tr.appendChild(th);
+
+  VOGAIS.forEach(v => {
+    const td = document.createElement("td");
+    if (KATAKANA_TABLE[cons][v]) {
+      td.innerHTML = `<label><input type="checkbox" value="${KATAKANA_TABLE[cons][v]}"> ${KATAKANA_TABLE[cons][v]}</label>`;
+    }
+    tr.appendChild(td);
+  });
+
+  tableKata.appendChild(tr);
+}
+contKata.appendChild(tableKata);
+
+
+// ----------------- Lógica Hiragana -----------------
+let hiraSel = [];
+let hiraIdx = 0;
+
+document.getElementById("start-hira").onclick = () => {
+  hiraSel = [...document.querySelectorAll("#table-container input:checked")].map(x => x.value);
+
+  if (hiraSel.length === 0) {
+    alert("Selecione pelo menos 1 hiragana!");
+    return;
+  }
+
+  hiraSel = shuffle(hiraSel);
+  hiraIdx = 0;
+
+  document.getElementById("app-hira").style.display = "block";
+  showHira();
+};
+
+function showHira() {
+  document.getElementById("feedback-hira").textContent = "";
+  document.getElementById("answer-hira").value = "";
+  document.getElementById("kana-hira").textContent = hiraSel[hiraIdx];
+}
+
+document.getElementById("answer-hira").addEventListener("keyup", e => {
+  if (e.key !== "Enter") return;
+
+  const cur = hiraSel[hiraIdx];
+  const ok = ROMAJI_MAP[cur];
+
+  if (e.target.value.trim().toLowerCase() === ok) {
+    document.getElementById("feedback-hira").textContent = "✔️ Correto!";
+    hiraIdx++;
+    if (hiraIdx >= hiraSel.length) {
+      document.getElementById("feedback-hira").textContent = "🎉 Fim!";
+      document.getElementById("kana-hira").textContent = "";
+      return;
+    }
+    setTimeout(showHira, 600);
+  } else {
+    document.getElementById("feedback-hira").textContent = "❌ Errado!";
+  }
+});
+
+
+// ----------------- Lógica Katakana -----------------
+let kataSel = [];
+let kataIdx = 0;
+
+document.getElementById("start-kata").onclick = () => {
+  kataSel = [...document.querySelectorAll("#table-kata input:checked")].map(x => x.value);
+
+  if (kataSel.length === 0) {
+    alert("Selecione pelo menos 1 katakana!");
+    return;
+  }
+
+  kataSel = shuffle(kataSel);
+  kataIdx = 0;
+
+  document.getElementById("app-kata").style.display = "block";
+  showKata();
+};
+
+function showKata() {
+  document.getElementById("feedback-kata").textContent = "";
+  document.getElementById("answer-kata").value = "";
+  document.getElementById("kana-kata").textContent = kataSel[kataIdx];
+}
+
+document.getElementById("answer-kata").addEventListener("keyup", e => {
+  if (e.key !== "Enter") return;
+
+  const cur = kataSel[kataIdx];
+  const ok = ROMAJI_MAP[cur];
+
+  if (e.target.value.trim().toLowerCase() === ok) {
+    document.getElementById("feedback-kata").textContent = "✔️ Correto!";
+    kataIdx++;
+    if (kataIdx >= kataSel.length) {
+      document.getElementById("feedback-kata").textContent = "🎉 Fim!";
+      document.getElementById("kana-kata").textContent = "";
+      return;
+    }
+    setTimeout(showKata, 600);
+  } else {
+    document.getElementById("feedback-kata").textContent = "❌ Errado!";
+  }
+});
+
+
+// ------------------ TREINO DE NÚMEROS --------------------
+
+const NUMS = [
+  { jp: "一 (1)", romaji: "ichi" },
+  { jp: "二 (2)", romaji: "ni" },
+  { jp: "三 (3)", romaji: "san" },
+  { jp: "四 (4)", romaji: "yon" },
+  { jp: "五 (5)", romaji: "go" },
+  { jp: "六 (6)", romaji: "roku" },
+  { jp: "七 (7)", romaji: "nana" },
+  { jp: "八 (8)", romaji: "hachi" },
+  { jp: "九 (9)", romaji: "kyuu" },
+  { jp: "十 (10)", romaji: "juu" }
+];
+
+let numsList = [];
+let numIndex = 0;
+
+document.getElementById("start-num").onclick = () => {
+  numsList = shuffle([...NUMS]);
+  numIndex = 0;
+  document.getElementById("app-num").style.display = "block";
+  showNum();
+};
+
+function showNum() {
+  document.getElementById("feedback-num").textContent = "";
+  document.getElementById("answer-num").value = "";
+  document.getElementById("kana-num").textContent = numsList[numIndex].jp;
+}
+
+document.getElementById("answer-num").addEventListener("keyup", (e) => {
+  if (e.key !== "Enter") return;
+
+  const current = numsList[numIndex];
+
+  if (e.target.value.trim().toLowerCase() === current.romaji) {
+    document.getElementById("feedback-num").textContent = "✔️ Correto!";
+    numIndex++;
+    if (numIndex >= numsList.length) {
+      document.getElementById("feedback-num").textContent = "🎉 Fim!";
+      document.getElementById("kana-num").textContent = "";
+      return;
+    }
+    setTimeout(showNum, 600);
+  } else {
+    document.getElementById("feedback-num").textContent = "❌ Errado!";
+  }
+});
+</script>
+
 </body>
 </html>
