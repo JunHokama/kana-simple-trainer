@@ -20,11 +20,95 @@
     "hiragana/kanji": "魚",
     "tradução": "Peixe"
   },
+  {
+    "id": 4,
+    "is_deleted": false,
+    "romanji": "Mizu",
+    "hiragana/kanji": "水",
+    "tradução": "Água"
+  },
+  {
+    "id": 5,
+    "is_deleted": false,
+    "romanji": "Isha",
+    "hiragana/kanji": "医者",
+    "tradução": "Médico"
+  },
+  {
+    "id": 6,
+    "is_deleted": false,
+    "romanji": "Gakkou",
+    "hiragana/kanji": "学校",
+    "tradução": "Escola"
+  },
+  {
+    "id": 7,
+    "is_deleted": false,
+    "romanji": "Gakusei",
+    "hiragana/kanji": "学生",
+    "tradução": "Estudante"
+  },
+  {
+    "id": 8,
+    "is_deleted": false,
+    "romanji": "Sensei",
+    "hiragana/kanji": "先生",
+    "tradução": "Professor"
+  },
     {
-        "id": 4,
+        "id": 9,
         "is_deleted": false,
-        "romanji": "Mizu",
-        "hiragana/kanji": "水",
-        "tradução": "Água"
+        "romanji": "Oni",
+        "hiragana/kanji": "鬼",
+        "tradução": "Demônio"
+    },
+    {
+        "id": 10,
+        "is_deleted": false,
+        "romanji": "Kazoku",
+        "hiragana/kanji": "家族",
+        "tradução": "Família"
+    },
+    {
+        "id": 11,
+        "is_deleted": false,
+        "romanji": "Ani",
+        "hiragana/kanji": "兄",
+        "tradução": "Irmão mais velho"
+    },
+    {
+        "id": 12,
+        "is_deleted": false,
+        "romanji": "Ane",
+        "hiragana/kanji": "姉",
+        "tradução": "Irmã mais velha"
+    },
+    {
+        "id": 13,
+        "is_deleted": false,
+        "romanji": "Otouto",
+        "hiragana/kanji": "弟",
+        "tradução": "Irmão mais novo"
+    },
+    {
+        "id": 14,
+        "is_deleted": false,
+        "romanji": "Imouto",
+        "hiragana/kanji": "妹",
+        "tradução": "Irmã mais nova"
+    },
+    {
+        "id": 15,
+        "is_deleted": false,
+        "romanji": "Haha",
+        "hiragana/kanji": "母",
+        "tradução": "Mãe"
+    },
+    {
+        "id": 16,
+        "is_deleted": false,
+        "romanji": "Chichi",
+        "hiragana/kanji": "父",
+        "tradução": "Pai"
     }
 ]
