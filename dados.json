@@ -110,5 +110,89 @@
         "romanji": "Chichi",
         "hiragana/kanji": "父",
         "tradução": "Pai"
+    },
+{
+        "id": 17,
+        "is_deleted": false,
+        "romanji": "Imouto wa gakusei desu",
+        "hiragana/kanji": "妹は学生です (いもうとはがくせいです)",
+        "tradução": "Minha irmã mais nova é estudante"
+    },
+    {
+        "id": 18,
+        "is_deleted": false,
+        "romanji": "Watashi no imouto ja nai desu",
+        "hiragana/kanji": "私の妹じゃないです (わたしのいもうとじゃないです)",
+        "tradução": "Ela não é minha irmã mais nova"
+    },
+    {
+        "id": 19,
+        "is_deleted": false,
+        "romanji": "Mo",
+        "hiragana/kanji": "も",
+        "tradução": "Também"
+    },
+    {
+        "id": 20,
+        "is_deleted": false,
+        "romanji": "Obasan",
+        "hiragana/kanji": "おばさん",
+        "tradução": "Tia / Senhora"
+    },
+    {
+        "id": 21,
+        "is_deleted": false,
+        "romanji": "Sobo",
+        "hiragana/kanji": "祖母 (そぼ)",
+        "tradução": "Avó (minha)"
+    },
+    {
+        "id": 22,
+        "is_deleted": false,
+        "romanji": "Obaasan",
+        "hiragana/kanji": "おばあさん",
+        "tradução": "Avó (de alguém ou tratamento carinhoso)"
+    },
+    {
+        "id": 23,
+        "is_deleted": false,
+        "romanji": "Sofu",
+        "hiragana/kanji": "祖父 (そふ)",
+        "tradução": "Avô (meu)"
+    },
+    {
+        "id": 24,
+        "is_deleted": false,
+        "romanji": "Genki",
+        "hiragana/kanji": "元気 (げんき)",
+        "tradução": "Saudável / Bem / Disposto"
+    },
+    {
+        "id": 25,
+        "is_deleted": false,
+        "romanji": "Sofu wa genki desu",
+        "hiragana/kanji": "祖父は元気です",
+        "tradução": "Meu avô está bem/saudável"
+    },
+    {
+        "id": 26,
+        "is_deleted": false,
+        "romanji": "Genki desu ka?",
+        "hiragana/kanji": "元気ですか？",
+        "tradução": "Você está bem?"
+    },
+    {
+        "id": 27,
+        "is_deleted": false,
+        "romanji": "Haha wa genki desu",
+        "hiragana/kanji": "母は元気です",
+        "tradução": "Minha mãe está bem"
+    },
+    {
+        "id": 28,
+        "is_deleted": false,
+        "romanji": "Ani mo sensei desu",
+        "hiragana/kanji": "兄も先生です",
+        "tradução": "Meu irmão mais velho também é professor"
     }
 ]
