@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcards de Japonês</title>
-<style>
-       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&family=Noto+Serif+JP:wght@900&display=swap');
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&family=Noto+Serif+JP:wght@900&display=swap');
 
         :root {
-            --bg: #f8f5f2; /* Off-white papel */
-            --ink: #2c2c2c; /* Cinza nanquim */
-            --accent: #bc002d; /* Vermelho Hinomaru */
+            --bg: #f8f5f2;
+            --ink: #2c2c2c;
+            --accent: #bc002d;
             --card-bg: #ffffff;
         }
 
@@ -31,15 +31,15 @@
             width: 100%; 
             max-width: 380px; 
             padding: 20px;
+            box-sizing: border-box;
         }
 
         h2 { 
             font-weight: 300; 
             letter-spacing: 0.2rem; 
             text-transform: uppercase; 
-            font-size: 0.9rem;
-            margin-bottom: 40px;
-            color: var(--ink);
+            font-size: 0.8rem;
+            margin-bottom: 30px;
             opacity: 0.6;
         }
 
@@ -47,7 +47,7 @@
         .flashcard-wrapper {
             perspective: 1200px;
             width: 100%;
-            height: 320px;
+            height: 350px;
             cursor: pointer;
         }
 
@@ -55,7 +55,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
 
@@ -70,166 +70,186 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 4px; /* Menos arredondado = mais sofisticado */
+            border-radius: 8px;
             background: var(--card-bg);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.06);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
-        .back { 
-            transform: rotateY(180deg); 
-            background-color: var(--card-bg);
-        }
+        .back { transform: rotateY(180deg); }
 
-        /* Estilo dos Números */
-        #num-display { 
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 700;
-            font-size: 6rem; 
-            margin: 0; 
-            color: var(--ink);
-        }
-
+        /* Estilos de Texto com Ajuste Dinâmico */
         #txt-kanji { 
             font-family: 'Noto Serif JP', serif;
-            font-size: 5rem; 
+            font-size: 4.5rem; /* Padrão para palavras curtas */
             color: var(--accent);
-            line-height: 1;
+            line-height: 1.2;
+            margin: 0;
+            transition: font-size 0.3s ease;
+            word-wrap: break-word;
+            max-width: 100%;
         }
 
+        /* Classes auxiliares para frases longas */
+        #txt-kanji.medium { font-size: 2.8rem; }
+        #txt-kanji.small { font-size: 1.8rem; }
+
         #txt-romaji { 
-            font-size: 1.2rem; 
-            margin-top: 15px; 
-            letter-spacing: 0.3rem;
+            font-size: 0.9rem; 
+            margin-bottom: 15px; 
+            letter-spacing: 0.2rem;
             text-transform: uppercase;
-            opacity: 0.5;
+            opacity: 0.4;
+            word-break: break-all;
+        }
+
+        #txt-traducao {
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 1.3;
+            transition: font-size 0.3s ease;
+        }
+
+        #txt-traducao.medium { font-size: 1.4rem; }
+        #txt-traducao.small { font-size: 1.1rem; }
+
+        .hint {
+            font-size: 0.65rem;
+            opacity: 0.3;
+            position: absolute;
+            bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Botões */
         .nav-buttons { 
-            margin-top: 50px; 
+            margin-top: 40px; 
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         button {
             background-color: var(--ink);
             color: white;
             border: none;
-            padding: 16px 32px;
-            font-size: 0.85rem;
-            letter-spacing: 0.1rem;
+            padding: 18px;
+            width: 100%;
+            font-size: 0.8rem;
+            letter-spacing: 0.15rem;
             text-transform: uppercase;
             cursor: pointer;
             transition: 0.3s;
-            border-radius: 2px;
+            border-radius: 4px;
         }
 
-        button:hover {
-            opacity: 0.9;
-            letter-spacing: 0.15rem;
-        }
+        button:hover { opacity: 0.9; background: #000; }
 
-        .btn-secondary {
+        .btn-voltar {
             background: transparent;
             color: var(--ink);
             border: 1px solid rgba(0,0,0,0.1);
+            margin-top: 10px;
         }
-
-        small {
-            font-size: 0.7rem;
-            letter-spacing: 0.05rem;
-            text-transform: uppercase;
-            opacity: 0.3;
-            margin-top: 30px;
-        }
-</style>
+    </style>
 </head>
 <body>
 
     <div class="container">
+        <h2>Flashcards</h2>
+        
         <div class="flashcard-wrapper" onclick="this.querySelector('.flashcard').classList.toggle('flipped')">
             <div class="flashcard" id="card">
                 <div class="front">
-                    <div class="romanji" id="txt-romanji">---</div>
-                    <h1 class="kanji" id="txt-kanji">---</h1>
+                    <div id="txt-romaji">---</div>
+                    <div id="txt-kanji">---</div>
                     <span class="hint">Toque para ver a tradução</span>
                 </div>
                 <div class="back">
-                    <div class="traducao" id="txt-traducao">---</div>
+                    <div id="txt-traducao">---</div>
                     <span class="hint">Toque para voltar</span>
                 </div>
             </div>
         </div>
         
-        <button id="next-btn">Próxima Palavra</button>
-
-
-        <button class="btn-voltar" onclick="window.location.href='index.html'">
-            <span>←</span> Voltar
-        </button>
+        <div class="nav-buttons">
+            <button id="next-btn">Próxima Palavra</button>
+            <button class="btn-voltar" onclick="window.history.back()">
+                Voltar
+            </button>
+        </div>
     </div>
-
-
 
     <script>
         let flashcards = [];
         let indexAtual = 0;
 
         const cardElement = document.getElementById('card');
-        const txtRomanji = document.getElementById('txt-romanji');
+        const txtRomanji = document.getElementById('txt-romaji');
         const txtKanji = document.getElementById('txt-kanji');
         const txtTraducao = document.getElementById('txt-traducao');
         const nextBtn = document.getElementById('next-btn');
 
-        // Carrega o JSON externo
         async function carregarDados() {
             try {
+                // Certifique-se que o arquivo dados.json está na mesma pasta
                 const response = await fetch('dados.json');
                 const data = await response.json();
                 
-                // Filtra deletados e embaralha a lista (Random)
                 flashcards = data
                     .filter(item => !item.is_deleted)
                     .sort(() => Math.random() - 0.5);
 
-                exibirCard();
+                if(flashcards.length > 0) exibirCard();
             } catch (erro) {
-                console.error("Erro ao carregar o JSON. Verifique se o arquivo existe e o CORS.", erro);
+                console.error("Erro:", erro);
                 txtKanji.innerText = "Erro ao carregar";
+                txtKanji.style.fontSize = "1rem";
             }
         }
 
         function exibirCard() {
             if (flashcards.length === 0) return;
 
-            // Garante que o card volte para a frente antes de trocar o texto
             cardElement.classList.remove('flipped');
 
-            // Timeout pequeno para o usuário não ver o texto mudando na frente dele
             setTimeout(() => {
-                const card = flashcards[indexAtual];
-                txtRomanji.innerText = card.romanji;
-                txtKanji.innerText = card['hiragana/kanji'];
-                txtTraducao.innerText = card.tradução;
+                const item = flashcards[indexAtual];
+                const kanjiText = item['hiragana/kanji'] || "";
+                const tradText = item.tradução || "";
+
+                // Ajuste de fonte para o Japonês
+                txtKanji.classList.remove('medium', 'small');
+                if (kanjiText.length > 12) {
+                    txtKanji.classList.add('small');
+                } else if (kanjiText.length > 6) {
+                    txtKanji.classList.add('medium');
+                }
+
+                // Ajuste de fonte para a Tradução
+                txtTraducao.classList.remove('medium', 'small');
+                if (tradText.length > 50) {
+                    txtTraducao.classList.add('small');
+                } else if (tradText.length > 20) {
+                    txtTraducao.classList.add('medium');
+                }
+
+                txtRomanji.innerText = item.romanji;
+                txtKanji.innerText = kanjiText;
+                txtTraducao.innerText = tradText;
             }, 150);
         }
 
         nextBtn.addEventListener('click', (e) => {
-            // Impede que o clique no botão dispare o giro do card (propagation)
             e.stopPropagation(); 
-            
-            indexAtual++;
-            if (indexAtual >= flashcards.length) {
-                // Se acabar, embaralha de novo e recomeça
-                flashcards.sort(() => Math.random() - 0.5);
-                indexAtual = 0;
-            }
+            indexAtual = (indexAtual + 1) % flashcards.length;
             exibirCard();
         });
 
-        // Inicia o app
         carregarDados();
     </script>
 </body>
