@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards de Japonês</title>
+<style>
+       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&family=Noto+Serif+JP:wght@900&display=swap');
+
+        :root {
+            --bg: #f8f5f2; /* Off-white papel */
+            --ink: #2c2c2c; /* Cinza nanquim */
+            --accent: #bc002d; /* Vermelho Hinomaru */
+            --card-bg: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { 
+            text-align: center; 
+            width: 100%; 
+            max-width: 380px; 
+            padding: 20px;
+        }
+
+        h2 { 
+            font-weight: 300; 
+            letter-spacing: 0.2rem; 
+            text-transform: uppercase; 
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            color: var(--ink);
+            opacity: 0.6;
+        }
+
+        /* O Flashcard */
+        .flashcard-wrapper {
+            perspective: 1200px;
+            width: 100%;
+            height: 320px;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped { transform: rotateY(180deg); }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px; /* Menos arredondado = mais sofisticado */
+            background: var(--card-bg);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .back { 
+            transform: rotateY(180deg); 
+            background-color: var(--card-bg);
+        }
+
+        /* Estilo dos Números */
+        #num-display { 
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+            font-size: 6rem; 
+            margin: 0; 
+            color: var(--ink);
+        }
+
+        #txt-kanji { 
+            font-family: 'Noto Serif JP', serif;
+            font-size: 5rem; 
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        #txt-romaji { 
+            font-size: 1.2rem; 
+            margin-top: 15px; 
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* Botões */
+        .nav-buttons { 
+            margin-top: 50px; 
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            background-color: var(--ink);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            letter-spacing: 0.15rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        small {
+            font-size: 0.7rem;
+            letter-spacing: 0.05rem;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-top: 30px;
+        }
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="flashcard-wrapper" onclick="this.querySelector('.flashcard').classList.toggle('flipped')">
+            <div class="flashcard" id="card">
+                <div class="front">
+                    <div class="romanji" id="txt-romanji">---</div>
+                    <h1 class="kanji" id="txt-kanji">---</h1>
+                    <span class="hint">Toque para ver a tradução</span>
+                </div>
+                <div class="back">
+                    <div class="traducao" id="txt-traducao">---</div>
+                    <span class="hint">Toque para voltar</span>
+                </div>
+            </div>
+        </div>
+        
+        <button id="next-btn">Próxima Palavra</button>
+
+
+        <button class="btn-voltar" onclick="window.location.href='index.html'">
+            <span>←</span> Voltar
+        </button>
+    </div>
+
+
+
+    <script>
+        let flashcards = [];
+        let indexAtual = 0;
+
+        const cardElement = document.getElementById('card');
+        const txtRomanji = document.getElementById('txt-romanji');
+        const txtKanji = document.getElementById('txt-kanji');
+        const txtTraducao = document.getElementById('txt-traducao');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Carrega o JSON externo
+        async function carregarDados() {
+            try {
+                const response = await fetch('dados.json');
+                const data = await response.json();
+                
+                // Filtra deletados e embaralha a lista (Random)
+                flashcards = data
+                    .filter(item => !item.is_deleted)
+                    .sort(() => Math.random() - 0.5);
+
+                exibirCard();
+            } catch (erro) {
+                console.error("Erro ao carregar o JSON. Verifique se o arquivo existe e o CORS.", erro);
+                txtKanji.innerText = "Erro ao carregar";
+            }
+        }
+
+        function exibirCard() {
+            if (flashcards.length === 0) return;
+
+            // Garante que o card volte para a frente antes de trocar o texto
+            cardElement.classList.remove('flipped');
+
+            // Timeout pequeno para o usuário não ver o texto mudando na frente dele
+            setTimeout(() => {
+                const card = flashcards[indexAtual];
+                txtRomanji.innerText = card.romanji;
+                txtKanji.innerText = card['hiragana/kanji'];
+                txtTraducao.innerText = card.tradução;
+            }, 150);
+        }
+
+        nextBtn.addEventListener('click', (e) => {
+            // Impede que o clique no botão dispare o giro do card (propagation)
+            e.stopPropagation(); 
+            
+            indexAtual++;
+            if (indexAtual >= flashcards.length) {
+                // Se acabar, embaralha de novo e recomeça
+                flashcards.sort(() => Math.random() - 0.5);
+                indexAtual = 0;
+            }
+            exibirCard();
+        });
+
+        // Inicia o app
+        carregarDados();
+    </script>
+</body>
+</html>

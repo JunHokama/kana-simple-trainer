@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suuji - Números</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&family=Noto+Serif+JP:wght@900&display=swap');
+
+        :root {
+            --bg: #f8f5f2; /* Off-white papel */
+            --ink: #2c2c2c; /* Cinza nanquim */
+            --accent: #bc002d; /* Vermelho Hinomaru */
+            --card-bg: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { 
+            text-align: center; 
+            width: 100%; 
+            max-width: 380px; 
+            padding: 20px;
+        }
+
+        h2 { 
+            font-weight: 300; 
+            letter-spacing: 0.2rem; 
+            text-transform: uppercase; 
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            color: var(--ink);
+            opacity: 0.6;
+        }
+
+        /* O Flashcard */
+        .flashcard-wrapper {
+            perspective: 1200px;
+            width: 100%;
+            height: 320px;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped { transform: rotateY(180deg); }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px; /* Menos arredondado = mais sofisticado */
+            background: var(--card-bg);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .back { 
+            transform: rotateY(180deg); 
+            background-color: var(--card-bg);
+        }
+
+        /* Estilo dos Números */
+        #num-display { 
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+            font-size: 6rem; 
+            margin: 0; 
+            color: var(--ink);
+        }
+
+        #txt-kanji { 
+            font-family: 'Noto Serif JP', serif;
+            font-size: 5rem; 
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        #txt-romaji { 
+            font-size: 1.2rem; 
+            margin-top: 15px; 
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* Botões */
+        .nav-buttons { 
+            margin-top: 50px; 
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            background-color: var(--ink);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            letter-spacing: 0.15rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        small {
+            font-size: 0.7rem;
+            letter-spacing: 0.05rem;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Suuji • 1 - 100</h2>
+        
+        <div class="flashcard-wrapper" onclick="this.querySelector('.flashcard').classList.toggle('flipped')">
+            <div class="flashcard" id="card">
+                <div class="front">
+                    <h1 id="num-display">1</h1>
+                    <small>Show Meaning</small>
+                </div>
+                <div class="back">
+                    <div id="txt-kanji">一</div>
+                    <div id="txt-romaji">Ichi</div>
+                    <small>Back</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button onclick="gerarNovoNumero()">Next Number</button>
+            <button class="btn-secondary" onclick="window.location.href='index.html'">Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        const kanjiNumeros = { 0: "", 1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九", 10: "十" };
+        const romajiNumeros = { 0: "", 1: "ichi", 2: "ni", 3: "san", 4: "yon", 5: "go", 6: "roku", 7: "nana", 8: "hachi", 9: "kyuu", 10: "juu" };
+
+        function converterParaJapones(n) {
+            if (n === 100) return { kanji: "百", romaji: "hyaku" };
+            let dezenas = Math.floor(n / 10);
+            let unidades = n % 10;
+            let k = ""; let r = "";
+
+            if (dezenas > 0) {
+                if (dezenas > 1) { k += kanjiNumeros[dezenas]; r += romajiNumeros[dezenas]; }
+                k += kanjiNumeros[10]; r += (r ? "" : "") + "juu";
+            }
+            if (unidades > 0) {
+                k += kanjiNumeros[unidades];
+                r += (dezenas > 0 ? "-" : "") + romajiNumeros[unidades];
+            }
+            return { kanji: k, romaji: r };
+        }
+
+        function gerarNovoNumero() {
+            const card = document.getElementById('card');
+            card.classList.remove('flipped');
+
+            setTimeout(() => {
+                const num = Math.floor(Math.random() * 100) + 1;
+                const info = converterParaJapones(num);
+                document.getElementById('num-display').innerText = num;
+                document.getElementById('txt-kanji').innerText = info.kanji;
+                document.getElementById('txt-romaji').innerText = info.romaji;
+            }, 200);
+        }
+
+        gerarNovoNumero();
+    </script>
+</body>
+</html>

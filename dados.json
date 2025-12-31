@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "is_deleted": false,
+    "romanji": "Neko",
+    "hiragana/kanji": "猫",
+    "tradução": "Gato"
+  },
+  {
+    "id": 2,
+    "is_deleted": false,
+    "romanji": "Inu",
+    "hiragana/kanji": "犬",
+    "tradução": "Cachorro"
+  },
+  {
+    "id": 3,
+    "is_deleted": false,
+    "romanji": "Sakana",
+    "hiragana/kanji": "魚",
+    "tradução": "Peixe"
+  },
+    {
+        "id": 4,
+        "is_deleted": false,
+        "romanji": "Mizu",
+        "hiragana/kanji": "水",
+        "tradução": "Água"
+    }
+]
