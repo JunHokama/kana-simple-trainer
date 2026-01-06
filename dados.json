@@ -198,42 +198,42 @@
   {
     "id": 29,
     "is_deleted": false,
-    "romaji": "yonde kudasai",
+    "romanji": "yonde kudasai",
     "hiragana/kanji": "読んでください",
     "tradução": "Por favor, leia"
   },
   {
     "id": 30,
     "is_deleted": false,
-    "romaji": "kore",
+    "romanji": "kore",
     "hiragana/kanji": "これ",
     "tradução": "Isto"
   },
   {
     "id": 31,
     "is_deleted": false,
-    "romaji": "sakura",
+    "romanji": "sakura",
     "hiragana/kanji": "桜",
     "tradução": "Cerejeira / Flor de cerejeira"
   },
   {
     "id": 32,
     "is_deleted": false,
-    "romaji": "kite kudasai",
+    "romanji": "kite kudasai",
     "hiragana/kanji": "来てください",
     "tradução": "Por favor, venha"
   },
   {
     "id": 33,
     "is_deleted": false,
-    "romaji": "koko",
+    "romanji": "koko",
     "hiragana/kanji": "ここ",
     "tradução": "Aqui"
   },
   {
     "id": 34,
     "is_deleted": false,
-    "romaji": "yoroshiku onegaishimasu",
+    "romanji": "yoroshiku onegaishimasu",
     "hiragana/kanji": "よろしくお願いします",
     "tradução": "Prazer em conhecê-lo / Conto com sua colaboração"
   },
