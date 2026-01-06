@@ -55,144 +55,459 @@
     "hiragana/kanji": "先生",
     "tradução": "Professor"
   },
-    {
-        "id": 9,
-        "is_deleted": false,
-        "romanji": "Oni",
-        "hiragana/kanji": "鬼",
-        "tradução": "Demônio"
-    },
-    {
-        "id": 10,
-        "is_deleted": false,
-        "romanji": "Kazoku",
-        "hiragana/kanji": "家族",
-        "tradução": "Família"
-    },
-    {
-        "id": 11,
-        "is_deleted": false,
-        "romanji": "Ani",
-        "hiragana/kanji": "兄",
-        "tradução": "Irmão mais velho"
-    },
-    {
-        "id": 12,
-        "is_deleted": false,
-        "romanji": "Ane",
-        "hiragana/kanji": "姉",
-        "tradução": "Irmã mais velha"
-    },
-    {
-        "id": 13,
-        "is_deleted": false,
-        "romanji": "Otouto",
-        "hiragana/kanji": "弟",
-        "tradução": "Irmão mais novo"
-    },
-    {
-        "id": 14,
-        "is_deleted": false,
-        "romanji": "Imouto",
-        "hiragana/kanji": "妹",
-        "tradução": "Irmã mais nova"
-    },
-    {
-        "id": 15,
-        "is_deleted": false,
-        "romanji": "Haha",
-        "hiragana/kanji": "母",
-        "tradução": "Mãe"
-    },
-    {
-        "id": 16,
-        "is_deleted": false,
-        "romanji": "Chichi",
-        "hiragana/kanji": "父",
-        "tradução": "Pai"
-    },
-{
-        "id": 17,
-        "is_deleted": false,
-        "romanji": "Imouto wa gakusei desu",
-        "hiragana/kanji": "妹は学生です (いもうとはがくせいです)",
-        "tradução": "Minha irmã mais nova é estudante"
-    },
-    {
-        "id": 18,
-        "is_deleted": false,
-        "romanji": "Watashi no imouto ja nai desu",
-        "hiragana/kanji": "私の妹じゃないです (わたしのいもうとじゃないです)",
-        "tradução": "Ela não é minha irmã mais nova"
-    },
-    {
-        "id": 19,
-        "is_deleted": false,
-        "romanji": "Mo",
-        "hiragana/kanji": "も",
-        "tradução": "Também"
-    },
-    {
-        "id": 20,
-        "is_deleted": false,
-        "romanji": "Obasan",
-        "hiragana/kanji": "おばさん",
-        "tradução": "Tia / Senhora"
-    },
-    {
-        "id": 21,
-        "is_deleted": false,
-        "romanji": "Sobo",
-        "hiragana/kanji": "祖母 (そぼ)",
-        "tradução": "Avó (minha)"
-    },
-    {
-        "id": 22,
-        "is_deleted": false,
-        "romanji": "Obaasan",
-        "hiragana/kanji": "おばあさん",
-        "tradução": "Avó (de alguém ou tratamento carinhoso)"
-    },
-    {
-        "id": 23,
-        "is_deleted": false,
-        "romanji": "Sofu",
-        "hiragana/kanji": "祖父 (そふ)",
-        "tradução": "Avô (meu)"
-    },
-    {
-        "id": 24,
-        "is_deleted": false,
-        "romanji": "Genki",
-        "hiragana/kanji": "元気 (げんき)",
-        "tradução": "Saudável / Bem / Disposto"
-    },
-    {
-        "id": 25,
-        "is_deleted": false,
-        "romanji": "Sofu wa genki desu",
-        "hiragana/kanji": "祖父は元気です",
-        "tradução": "Meu avô está bem/saudável"
-    },
-    {
-        "id": 26,
-        "is_deleted": false,
-        "romanji": "Genki desu ka?",
-        "hiragana/kanji": "元気ですか？",
-        "tradução": "Você está bem?"
-    },
-    {
-        "id": 27,
-        "is_deleted": false,
-        "romanji": "Haha wa genki desu",
-        "hiragana/kanji": "母は元気です",
-        "tradução": "Minha mãe está bem"
-    },
-    {
-        "id": 28,
-        "is_deleted": false,
-        "romanji": "Ani mo sensei desu",
-        "hiragana/kanji": "兄も先生です",
-        "tradução": "Meu irmão mais velho também é professor"
-    }
+  {
+    "id": 9,
+    "is_deleted": false,
+    "romanji": "Oni",
+    "hiragana/kanji": "鬼",
+    "tradução": "Demônio"
+  },
+  {
+    "id": 10,
+    "is_deleted": false,
+    "romanji": "Kazoku",
+    "hiragana/kanji": "家族",
+    "tradução": "Família"
+  },
+  {
+    "id": 11,
+    "is_deleted": false,
+    "romanji": "Ani",
+    "hiragana/kanji": "兄",
+    "tradução": "Irmão mais velho"
+  },
+  {
+    "id": 12,
+    "is_deleted": false,
+    "romanji": "Ane",
+    "hiragana/kanji": "姉",
+    "tradução": "Irmã mais velha"
+  },
+  {
+    "id": 13,
+    "is_deleted": false,
+    "romanji": "Otouto",
+    "hiragana/kanji": "弟",
+    "tradução": "Irmão mais novo"
+  },
+  {
+    "id": 14,
+    "is_deleted": false,
+    "romanji": "Imouto",
+    "hiragana/kanji": "妹",
+    "tradução": "Irmã mais nova"
+  },
+  {
+    "id": 15,
+    "is_deleted": false,
+    "romanji": "Haha",
+    "hiragana/kanji": "母",
+    "tradução": "Mãe"
+  },
+  {
+    "id": 16,
+    "is_deleted": false,
+    "romanji": "Chichi",
+    "hiragana/kanji": "父",
+    "tradução": "Pai"
+  },
+  {
+    "id": 17,
+    "is_deleted": false,
+    "romanji": "Imouto wa gakusei desu",
+    "hiragana/kanji": "妹は学生です (いもうとはがくせいです)",
+    "tradução": "Minha irmã mais nova é estudante"
+  },
+  {
+    "id": 18,
+    "is_deleted": false,
+    "romanji": "Watashi no imouto ja nai desu",
+    "hiragana/kanji": "私の妹じゃないです (わたしのいもうとじゃないです)",
+    "tradução": "Ela não é minha irmã mais nova"
+  },
+  {
+    "id": 19,
+    "is_deleted": false,
+    "romanji": "Mo",
+    "hiragana/kanji": "も",
+    "tradução": "Também"
+  },
+  {
+    "id": 20,
+    "is_deleted": false,
+    "romanji": "Obasan",
+    "hiragana/kanji": "おばさん",
+    "tradução": "Tia / Senhora"
+  },
+  {
+    "id": 21,
+    "is_deleted": false,
+    "romanji": "Sobo",
+    "hiragana/kanji": "祖母 (そぼ)",
+    "tradução": "Avó (minha)"
+  },
+  {
+    "id": 22,
+    "is_deleted": false,
+    "romanji": "Obaasan",
+    "hiragana/kanji": "おばあさん",
+    "tradução": "Avó (de alguém ou tratamento carinhoso)"
+  },
+  {
+    "id": 23,
+    "is_deleted": false,
+    "romanji": "Sofu",
+    "hiragana/kanji": "祖父 (そふ)",
+    "tradução": "Avô (meu)"
+  },
+  {
+    "id": 24,
+    "is_deleted": false,
+    "romanji": "Genki",
+    "hiragana/kanji": "元気 (げんき)",
+    "tradução": "Saudável / Bem / Disposto"
+  },
+  {
+    "id": 25,
+    "is_deleted": false,
+    "romanji": "Sofu wa genki desu",
+    "hiragana/kanji": "祖父は元気です",
+    "tradução": "Meu avô está bem/saudável"
+  },
+  {
+    "id": 26,
+    "is_deleted": false,
+    "romanji": "Genki desu ka?",
+    "hiragana/kanji": "元気ですか？",
+    "tradução": "Você está bem?"
+  },
+  {
+    "id": 27,
+    "is_deleted": false,
+    "romanji": "Haha wa genki desu",
+    "hiragana/kanji": "母は元気です",
+    "tradução": "Minha mãe está bem"
+  },
+  {
+    "id": 28,
+    "is_deleted": false,
+    "romanji": "Ani mo sensei desu",
+    "hiragana/kanji": "兄も先生です",
+    "tradução": "Meu irmão mais velho também é professor"
+  },
+  {
+    "id": 29,
+    "is_deleted": false,
+    "romaji": "yonde kudasai",
+    "hiragana/kanji": "読んでください",
+    "tradução": "Por favor, leia"
+  },
+  {
+    "id": 30,
+    "is_deleted": false,
+    "romaji": "kore",
+    "hiragana/kanji": "これ",
+    "tradução": "Isto"
+  },
+  {
+    "id": 31,
+    "is_deleted": false,
+    "romaji": "sakura",
+    "hiragana/kanji": "桜",
+    "tradução": "Cerejeira / Flor de cerejeira"
+  },
+  {
+    "id": 32,
+    "is_deleted": false,
+    "romaji": "kite kudasai",
+    "hiragana/kanji": "来てください",
+    "tradução": "Por favor, venha"
+  },
+  {
+    "id": 33,
+    "is_deleted": false,
+    "romaji": "koko",
+    "hiragana/kanji": "ここ",
+    "tradução": "Aqui"
+  },
+  {
+    "id": 34,
+    "is_deleted": false,
+    "romaji": "yoroshiku onegaishimasu",
+    "hiragana/kanji": "よろしくお願いします",
+    "tradução": "Prazer em conhecê-lo / Conto com sua colaboração"
+  },
+  {
+    "id": 35,
+    "is_deleted": false,
+    "romanji": "Ohayou gozaimasu",
+    "hiragana/kanji": "おはようございます",
+    "tradução": "Bom dia"
+  },
+  {
+    "id": 36,
+    "is_deleted": false,
+    "romanji": "Konnichiwa",
+    "hiragana/kanji": "こんにちは",
+    "tradução": "Boa tarde / Olá"
+  },
+  {
+    "id": 37,
+    "is_deleted": false,
+    "romanji": "Konbanwa",
+    "hiragana/kanji": "こんばんは",
+    "tradução": "Boa noite (ao encontrar alguém)"
+  },
+  {
+    "id": 38,
+    "is_deleted": false,
+    "romanji": "Oyasumi nasai",
+    "hiragana/kanji": "おやすみなさい",
+    "tradução": "Boa noite (ao dormir ou despedir-se)"
+  },
+  {
+    "id": 39,
+    "is_deleted": false,
+    "romanji": "Sayounara",
+    "hiragana/kanji": "さようなら",
+    "tradução": "Adeus / Tchau"
+  },
+  {
+    "id": 40,
+    "is_deleted": false,
+    "romanji": "Arigatou gozaimasu",
+    "hiragana/kanji": "ありがとうございます",
+    "tradução": "Muito obrigado(a)"
+  },
+  {
+    "id": 41,
+    "is_deleted": false,
+    "romanji": "Sumimasen",
+    "hiragana/kanji": "すみません",
+    "tradução": "Com licença / Desculpe"
+  },
+  {
+    "id": 42,
+    "is_deleted": false,
+    "romanji": "Hajimemashite",
+    "hiragana/kanji": "はじめまして",
+    "tradução": "Prazer em conhecer (primeira vez)"
+  },
+  {
+    "id": 43,
+    "is_deleted": false,
+    "romanji": "Watashi",
+    "hiragana/kanji": "私",
+    "tradução": "Eu"
+  },
+  {
+    "id": 44,
+    "is_deleted": false,
+    "romanji": "Anata",
+    "hiragana/kanji": "あなた",
+    "tradução": "Você"
+  },
+  {
+    "id": 45,
+    "is_deleted": false,
+    "romanji": "Nihon",
+    "hiragana/kanji": "日本",
+    "tradução": "Japão"
+  },
+  {
+    "id": 46,
+    "is_deleted": false,
+    "romanji": "Burajiru",
+    "hiragana/kanji": "ブラジル",
+    "tradução": "Brasil"
+  },
+  {
+    "id": 47,
+    "is_deleted": false,
+    "romanji": "Namae",
+    "hiragana/kanji": "名前",
+    "tradução": "Nome"
+  },
+  {
+    "id": 48,
+    "is_deleted": false,
+    "romanji": "Kuni",
+    "hiragana/kanji": "国",
+    "tradução": "País"
+  },
+  {
+    "id": 49,
+    "is_deleted": false,
+    "romanji": "Otto",
+    "hiragana/kanji": "夫",
+    "tradução": "Marido (meu)"
+  },
+  {
+    "id": 50,
+    "is_deleted": false,
+    "romanji": "Tsuma",
+    "hiragana/kanji": "妻",
+    "tradução": "Esposa (minha)"
+  },
+  {
+    "id": 51,
+    "is_deleted": false,
+    "romanji": "Kodomo",
+    "hiragana/kanji": "子ども",
+    "tradução": "Criança / Filho(a)"
+  },
+  {
+    "id": 52,
+    "is_deleted": false,
+    "romanji": "Tomodachi",
+    "hiragana/kanji": "友だち",
+    "tradução": "Amigo"
+  },
+  {
+    "id": 53,
+    "is_deleted": false,
+    "romanji": "Mite kudasai",
+    "hiragana/kanji": "見てください",
+    "tradução": "Por favor, olhe/veja"
+  },
+  {
+    "id": 54,
+    "is_deleted": false,
+    "romanji": "Kiite kudasai",
+    "hiragana/kanji": "聞いてください",
+    "tradução": "Por favor, escute"
+  },
+  {
+    "id": 55,
+    "is_deleted": false,
+    "romanji": "Kaite kudasai",
+    "hiragana/kanji": "書いてください",
+    "tradução": "Por favor, escreva"
+  },
+  {
+    "id": 56,
+    "is_deleted": false,
+    "romanji": "Itte kudasai",
+    "hiragana/kanji": "言ってください",
+    "tradução": "Por favor, fale/diga"
+  },
+  {
+    "id": 57,
+    "is_deleted": false,
+    "romanji": "Mou ichido",
+    "hiragana/kanji": "もう一度",
+    "tradução": "Mais uma vez"
+  },
+  {
+    "id": 58,
+    "is_deleted": false,
+    "romanji": "Wakarimashita",
+    "hiragana/kanji": "わかりました",
+    "tradução": "Entendi"
+  },
+  {
+    "id": 59,
+    "is_deleted": false,
+    "romanji": "Wakarimasen",
+    "hiragana/kanji": "わかりません",
+    "tradução": "Não entendo"
+  },
+  {
+    "id": 60,
+    "is_deleted": false,
+    "romanji": "Doko",
+    "hiragana/kanji": "どこ",
+    "tradução": "Onde"
+  },
+  {
+    "id": 61,
+    "is_deleted": false,
+    "romanji": "Chuugoku",
+    "hiragana/kanji": "中国",
+    "tradução": "China"
+  },
+  {
+    "id": 62,
+    "is_deleted": false,
+    "romanji": "Chuugokujin",
+    "hiragana/kanji": "中国人",
+    "tradução": "Chinês / Chinesa"
+  },
+  {
+    "id": 63,
+    "is_deleted": false,
+    "romanji": "Amerika",
+    "hiragana/kanji": "アメリカ",
+    "tradução": "EUA (Estados Unidos)"
+  },
+  {
+    "id": 64,
+    "is_deleted": false,
+    "romanji": "Amerikajin",
+    "hiragana/kanji": "アメリカ人",
+    "tradução": "Americano / Americana"
+  },
+  {
+    "id": 65,
+    "is_deleted": false,
+    "romanji": "~ jin",
+    "hiragana/kanji": "～人",
+    "tradução": "Sufixo para nacionalidade (pessoa de...)"
+  },
+  {
+    "id": 66,
+    "is_deleted": false,
+    "romanji": "~ sai",
+    "hiragana/kanji": "～歳",
+    "tradução": "Sufixo para idade (anos de idade)"
+  },
+  {
+    "id": 67,
+    "is_deleted": false,
+    "romanji": "Nan-sai desu ka?",
+    "hiragana/kanji": "何歳ですか？",
+    "tradução": "Quantos anos você tem?"
+  },
+  {
+    "id": 68,
+    "is_deleted": false,
+    "romanji": "Hatachi",
+    "hiragana/kanji": "二十歳 (はたち)",
+    "tradução": "20 anos de idade (leitura especial)"
+  },
+  {
+    "id": 69,
+    "is_deleted": false,
+    "romanji": "Chuugokujin desu",
+    "hiragana/kanji": "中国人です",
+    "tradução": "Sou chinês(a)"
+  },
+  {
+    "id": 70,
+    "is_deleted": false,
+    "romanji": "Watashi wa Nihao desu",
+    "hiragana/kanji": "私はニーハオです",
+    "tradução": "Eu sou o Nihao"
+  },
+  {
+    "id": 71,
+    "is_deleted": false,
+    "romanji": "Ni-juu-go-sai desu",
+    "hiragana/kanji": "25歳です (にじゅうごさいです)",
+    "tradução": "Tenho 25 anos"
+  },
+  {
+    "id": 72,
+    "is_deleted": false,
+    "romanji": "Kankoku",
+    "hiragana/kanji": "韓国",
+    "tradução": "Coreia do Sul"
+  },
+  {
+    "id": 73,
+    "is_deleted": false,
+    "romanji": "Kankokujin",
+    "hiragana/kanji": "韓国人",
+    "tradução": "Coreano / Coreana"
+  }
 ]
