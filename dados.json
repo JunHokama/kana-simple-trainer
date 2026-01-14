@@ -509,5 +509,82 @@
     "romanji": "Kankokujin",
     "hiragana/kanji": "韓国人",
     "tradução": "Coreano / Coreana"
+  },
+  {
+    "id": 74,
+    "is_deleted": false,
+    "romanji": "Musuko",
+    "hiragana/kanji": "息子",
+    "tradução": "Filho (meu)"
+  },
+  {
+    "id": 75,
+    "is_deleted": false,
+    "romanji": "Musume",
+    "hiragana/kanji": "娘",
+    "tradução": "Filha (minha)"
+  },
+  {
+    "id": 76,
+    "is_deleted": false,
+    "romanji": "Goshuujin",
+    "hiragana/kanji": "ご主人",
+    "tradução": "Marido (de outra pessoa)"
+  },
+  {
+    "id": 77,
+    "is_deleted": false,
+    "romanji": "Okusan",
+    "hiragana/kanji": "奥さん",
+    "tradução": "Esposa (de outra pessoa)"
+  },
+  {
+    "id": 78,
+    "is_deleted": false,
+    "romanji": "Nannin",
+    "hiragana/kanji": "何人 (なんにん)",
+    "tradução": "Quantas pessoas"
+  },
+  {
+    "id": 79,
+    "is_deleted": false,
+    "romanji": "Kazoku wa nannin desu ka?",
+    "hiragana/kanji": "家族は何人ですか？",
+    "tradução": "Quantas pessoas tem na sua família?"
+  },
+  {
+    "id": 80,
+    "is_deleted": false,
+    "romanji": "Musuko-san / Musume-san",
+    "hiragana/kanji": "息子さん / 娘さん",
+    "tradução": "Filho / Filha (de outra pessoa)"
+  },
+  {
+    "id": 81,
+    "is_deleted": false,
+    "romanji": "Nan-sai",
+    "hiragana/kanji": "何歳",
+    "tradução": "Quantos anos / Qual idade"
+  },
+  {
+    "id": 82,
+    "is_deleted": false,
+    "romanji": "Jussai",
+    "hiragana/kanji": "10歳 (じゅっさい)",
+    "tradução": "10 anos de idade"
+  },
+  {
+    "id": 83,
+    "is_deleted": false,
+    "romanji": "Musuko wa jussai desu",
+    "hiragana/kanji": "息子は10歳です",
+    "tradução": "Meu filho tem 10 anos"
+  },
+  {
+    "id": 84,
+    "is_deleted": false,
+    "romanji": "Musuko wa hassai desu",
+    "hiragana/kanji": "息子は8歳です (はっさい)",
+    "tradução": "Meu filho tem 8 anos"
   }
 ]
