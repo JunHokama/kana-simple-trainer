@@ -197,7 +197,7 @@
   },
   {
     "id": 29,
-    "is_deleted": false,
+    "is_deleted": true,
     "romanji": "yonde kudasai",
     "hiragana/kanji": "読んでください",
     "tradução": "Por favor, leia"
@@ -218,7 +218,7 @@
   },
   {
     "id": 32,
-    "is_deleted": false,
+    "is_deleted": true,
     "romanji": "kite kudasai",
     "hiragana/kanji": "来てください",
     "tradução": "Por favor, venha"
@@ -365,28 +365,28 @@
   },
   {
     "id": 53,
-    "is_deleted": false,
+    "is_deleted": true,
     "romanji": "Mite kudasai",
     "hiragana/kanji": "見てください",
     "tradução": "Por favor, olhe/veja"
   },
   {
     "id": 54,
-    "is_deleted": false,
+    "is_deleted": true,
     "romanji": "Kiite kudasai",
     "hiragana/kanji": "聞いてください",
     "tradução": "Por favor, escute"
   },
   {
     "id": 55,
-    "is_deleted": false,
+    "is_deleted": true,
     "romanji": "Kaite kudasai",
     "hiragana/kanji": "書いてください",
     "tradução": "Por favor, escreva"
   },
   {
     "id": 56,
-    "is_deleted": false,
+    "is_deleted": true,
     "romanji": "Itte kudasai",
     "hiragana/kanji": "言ってください",
     "tradução": "Por favor, fale/diga"
@@ -562,7 +562,7 @@
   {
     "id": 81,
     "is_deleted": false,
-    "romanji": "Nan-sai",
+    "romanji": "Nan-sai/Nansai des ka",
     "hiragana/kanji": "何歳",
     "tradução": "Quantos anos / Qual idade"
   },
@@ -586,5 +586,26 @@
     "romanji": "Musuko wa hassai desu",
     "hiragana/kanji": "息子は8歳です (はっさい)",
     "tradução": "Meu filho tem 8 anos"
+  },
+  {
+    "id": 85,
+    "is_deleted": false,
+    "romanji": "Tsukue",
+    "hiragana/kanji": "机",
+    "tradução": "Mesa de trabalho"
+  },
+  {
+    "id": 86,
+    "is_deleted": false,
+    "romanji": "Yonin",
+    "hiragana/kanji": "四人 (よにん)",
+    "tradução": "4 pessoas"
+  },
+  {
+    "id": 87,
+    "is_deleted": false,
+    "romanji": "Musume wa hassai desu",
+    "hiragana/kanji": "娘は8歳です",
+    "tradução": "Minha filha tem 8 anos"
   }
 ]
