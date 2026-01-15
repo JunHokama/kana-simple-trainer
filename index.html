@@ -20,25 +20,41 @@
     .page { display: none; }
 
     .menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
     }
 
     .menu button {
-    width: 250px;
-    font-size: 22px;
-    padding: 15px 30px;
-    cursor: pointer;
+      width: 250px;
+      font-size: 22px;
+      padding: 15px 30px;
+      cursor: pointer;
+    }
+
+    /* Estilo para os botões de controle de seleção */
+    .selection-controls {
+      margin-bottom: 15px;
+    }
+    .selection-controls button {
+      font-size: 14px;
+      padding: 5px 10px;
+      margin: 0 5px;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .selection-controls button:hover {
+      background-color: #e0e0e0;
     }
 
   </style>
 </head>
 <body>
 
-  <!-- HOME -->
   <div id="home" class="page" style="display:block;">
     <h1>Treinos de Japonês</h1>
     <div class="menu">
@@ -54,11 +70,16 @@
     </div>
   </div>
 
-  <!-- HIRAGANA -->
   <div id="hiragana" class="page">
     <h2>Selecione os Hiragana</h2>
+    
+    <div class="selection-controls">
+      <button onclick="toggleAll('table-container', true)">Selecionar Todos</button>
+      <button onclick="toggleAll('table-container', false)">Limpar Todos</button>
+    </div>
+
     <div id="table-container"></div>
-    <button id="start-hira">Iniciar treino</button>
+    <br> <button id="start-hira">Iniciar treino</button>
     <hr>
 
     <div id="app-hira" style="display:none;">
@@ -70,10 +91,16 @@
     <button onclick="showPage('home')">Voltar</button>
   </div>
 
-  <!-- KATAKANA -->
   <div id="katakana" class="page">
     <h2>Selecione os Katakana</h2>
+    
+    <div class="selection-controls">
+      <button onclick="toggleAll('table-kata', true)">Selecionar Todos</button>
+      <button onclick="toggleAll('table-kata', false)">Limpar Todos</button>
+    </div>
+
     <div id="table-kata"></div>
+    <br>
     <button id="start-kata">Iniciar treino</button>
     <hr>
 
@@ -86,7 +113,6 @@
     <button onclick="showPage('home')">Voltar</button>
   </div>
 
-  <!-- NÚMEROS -->
   <div id="numeros" class="page">
     <h2>Treino de Números (1–10)</h2>
 
@@ -112,6 +138,14 @@ function showPage(id) {
   document.getElementById(id).style.display = "block";
 }
 
+// --- NOVA FUNÇÃO: Selecionar/Desmarcar Todos ---
+function toggleAll(containerId, state) {
+  const container = document.getElementById(containerId);
+  const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(cb => cb.checked = state);
+}
+
+
 // ------------ TABELAS BASE (HIRAGANA E KATAKANA) -------------------
 
 const VOGAIS = ["A","I","U","E","O"];
@@ -126,7 +160,8 @@ const HIRAGANA_TABLE = {
   "M": { "A":"ま","I":"み","U":"む","E":"め","O":"も" },
   "Y": { "A":"や",       "U":"ゆ",       "O":"よ" },
   "R": { "A":"ら","I":"り","U":"る","E":"れ","O":"ろ" },
-  "W": { "A":"わ",                     "O":"を" }
+  "W": { "A":"わ",                     "O":"を" },
+  "N (Final)": { "A":"ん" } // Adicionei o N final que as vezes falta, se quiser tirar é só apagar essa linha
 };
 
 const KATAKANA_TABLE = {
@@ -139,7 +174,8 @@ const KATAKANA_TABLE = {
   "M": { "A":"マ","I":"ミ","U":"ム","E":"メ","O":"モ" },
   "Y": { "A":"ヤ",       "U":"ユ",       "O":"ヨ" },
   "R": { "A":"ラ","I":"リ","U":"ル","E":"レ","O":"ロ" },
-  "W": { "A":"ワ",                     "O":"ヲ" }
+  "W": { "A":"ワ",                     "O":"ヲ" },
+  "N (Final)": { "A":"ン" }
 };
 
 // --- ROMAJI MAP (apenas 1 mapa para ambos) ---
@@ -148,9 +184,14 @@ const ROMAJI_MAP = {};
 // Preencher com hiragana
 for (const cons in HIRAGANA_TABLE) {
   for (const vow in HIRAGANA_TABLE[cons]) {
-    ROMAJI_MAP[HIRAGANA_TABLE[cons][vow]] = (cons + vow).toLowerCase();
+    ROMAJI_MAP[HIRAGANA_TABLE[cons][vow]] = (cons + vow).toLowerCase().replace("(final)a", ""); // hack pro N
   }
 }
+// Ajuste manual pro N
+ROMAJI_MAP["ん"] = "n";
+ROMAJI_MAP["ン"] = "n";
+
+
 // Casos especiais hiragana
 ROMAJI_MAP["し"] = "shi";
 ROMAJI_MAP["ち"] = "chi";
@@ -161,7 +202,9 @@ ROMAJI_MAP["を"] = "wo";
 // Preencher com katakana
 for (const cons in KATAKANA_TABLE) {
   for (const vow in KATAKANA_TABLE[cons]) {
-    ROMAJI_MAP[KATAKANA_TABLE[cons][vow]] = (cons + vow).toLowerCase();
+    // Se não for o N, adiciona
+    if(KATAKANA_TABLE[cons][vow] !== "ン")
+        ROMAJI_MAP[KATAKANA_TABLE[cons][vow]] = (cons + vow).toLowerCase();
   }
 }
 // Casos especiais katakana
@@ -198,7 +241,7 @@ tableHira.appendChild(head);
 for (const cons in HIRAGANA_TABLE) {
   const tr = document.createElement("tr");
   const th = document.createElement("th");
-  th.textContent = cons;
+  th.textContent = cons.replace(" (Final)", ""); // Limpa o texto da tabela
   tr.appendChild(th);
 
   VOGAIS.forEach(v => {
@@ -230,7 +273,7 @@ tableKata.appendChild(head2);
 for (const cons in KATAKANA_TABLE) {
   const tr = document.createElement("tr");
   const th = document.createElement("th");
-  th.textContent = cons;
+  th.textContent = cons.replace(" (Final)", "");
   tr.appendChild(th);
 
   VOGAIS.forEach(v => {
@@ -269,6 +312,7 @@ function showHira() {
   document.getElementById("feedback-hira").textContent = "";
   document.getElementById("answer-hira").value = "";
   document.getElementById("kana-hira").textContent = hiraSel[hiraIdx];
+  document.getElementById("answer-hira").focus(); // Foca no input automaticamente
 }
 
 document.getElementById("answer-hira").addEventListener("keyup", e => {
@@ -279,6 +323,7 @@ document.getElementById("answer-hira").addEventListener("keyup", e => {
 
   if (e.target.value.trim().toLowerCase() === ok) {
     document.getElementById("feedback-hira").textContent = "✔️ Correto!";
+    document.getElementById("feedback-hira").style.color = "green"; // Corzinha
     hiraIdx++;
     if (hiraIdx >= hiraSel.length) {
       document.getElementById("feedback-hira").textContent = "🎉 Fim!";
@@ -288,6 +333,7 @@ document.getElementById("answer-hira").addEventListener("keyup", e => {
     setTimeout(showHira, 600);
   } else {
     document.getElementById("feedback-hira").textContent = "❌ Errado!";
+    document.getElementById("feedback-hira").style.color = "red";
   }
 });
 
@@ -315,6 +361,7 @@ function showKata() {
   document.getElementById("feedback-kata").textContent = "";
   document.getElementById("answer-kata").value = "";
   document.getElementById("kana-kata").textContent = kataSel[kataIdx];
+  document.getElementById("answer-kata").focus();
 }
 
 document.getElementById("answer-kata").addEventListener("keyup", e => {
@@ -325,6 +372,7 @@ document.getElementById("answer-kata").addEventListener("keyup", e => {
 
   if (e.target.value.trim().toLowerCase() === ok) {
     document.getElementById("feedback-kata").textContent = "✔️ Correto!";
+    document.getElementById("feedback-kata").style.color = "green";
     kataIdx++;
     if (kataIdx >= kataSel.length) {
       document.getElementById("feedback-kata").textContent = "🎉 Fim!";
@@ -334,6 +382,7 @@ document.getElementById("answer-kata").addEventListener("keyup", e => {
     setTimeout(showKata, 600);
   } else {
     document.getElementById("feedback-kata").textContent = "❌ Errado!";
+    document.getElementById("feedback-kata").style.color = "red";
   }
 });
 
@@ -367,6 +416,7 @@ function showNum() {
   document.getElementById("feedback-num").textContent = "";
   document.getElementById("answer-num").value = "";
   document.getElementById("kana-num").textContent = numsList[numIndex].jp;
+  document.getElementById("answer-num").focus();
 }
 
 document.getElementById("answer-num").addEventListener("keyup", (e) => {
@@ -376,6 +426,7 @@ document.getElementById("answer-num").addEventListener("keyup", (e) => {
 
   if (e.target.value.trim().toLowerCase() === current.romaji) {
     document.getElementById("feedback-num").textContent = "✔️ Correto!";
+    document.getElementById("feedback-num").style.color = "green";
     numIndex++;
     if (numIndex >= numsList.length) {
       document.getElementById("feedback-num").textContent = "🎉 Fim!";
@@ -385,6 +436,7 @@ document.getElementById("answer-num").addEventListener("keyup", (e) => {
     setTimeout(showNum, 600);
   } else {
     document.getElementById("feedback-num").textContent = "❌ Errado!";
+    document.getElementById("feedback-num").style.color = "red";
   }
 });
 </script>
