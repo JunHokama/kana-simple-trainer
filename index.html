@@ -4,20 +4,52 @@
   <meta charset="UTF-8">
   <title>Treino de Kana</title>
   <style>
-    body { font-family: sans-serif; text-align: center; margin: 40px; }
-    table { margin: 0 auto; border-collapse: collapse; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; margin: 0; padding: 40px; background-color: #fdfdfd; }
+    
+    /* Layout principal */
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      position: relative;
+    }
+
+    .content-area {
+      flex: 1;
+      max-width: 800px; /* Limita a largura da tabela */
+    }
+
+    table { margin: 0 auto; border-collapse: collapse; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
     td, th {
-      border: 1px solid #aaa;
+      border: 1px solid #ddd;
       padding: 10px;
       font-size: 28px;
       text-align: center;
       min-width: 50px;
     }
-    label { cursor: pointer; display: block; }
-    .kana { font-size: 120px; margin: 20px; }
-    #feedback { font-size: 20px; margin-top: 10px; height: 24px; }
+    th { background-color: #f4f4f4; color: #333; }
+    
+    label { cursor: pointer; display: block; user-select: none; }
+    label:hover { background-color: #f9f9f9; }
 
-    .page { display: none; }
+    .kana { font-size: 120px; margin: 20px; font-weight: bold; color: #333; }
+    
+    input { 
+      font-size: 24px; 
+      padding: 10px; 
+      text-align: center; 
+      border: 2px solid #ccc; 
+      border-radius: 8px; 
+      outline: none;
+      width: 200px;
+      transition: border-color 0.3s;
+    }
+    input:focus { border-color: #007bff; }
+
+    #feedback { font-size: 20px; margin-top: 10px; height: 24px; font-weight: bold; }
+
+    .page { display: none; width: 100%; }
 
     .menu {
       display: flex;
@@ -32,113 +64,197 @@
       font-size: 22px;
       padding: 15px 30px;
       cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      transition: transform 0.1s, background-color 0.2s;
     }
+    .menu button:hover { background-color: #0056b3; transform: scale(1.02); }
+    .menu button:active { transform: scale(0.98); }
 
-    /* Estilo para os botões de controle de seleção */
-    .selection-controls {
-      margin-bottom: 15px;
-    }
+    .selection-controls { margin-bottom: 15px; }
     .selection-controls button {
       font-size: 14px;
-      padding: 5px 10px;
+      padding: 8px 12px;
       margin: 0 5px;
       cursor: pointer;
-      background-color: #f0f0f0;
+      background-color: #fff;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-    .selection-controls button:hover {
-      background-color: #e0e0e0;
+    .selection-controls button:hover { background-color: #e0e0e0; }
+
+    /* --- NOVO CSS: PAINEL DE ERROS --- */
+    #stats-panel {
+      width: 200px;
+      background: #fff;
+      border: 2px solid #ffcccc;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: none; /* Escondido por padrão */
+      
+      /* Fixar na direita em telas grandes */
+      position: fixed;
+      right: 40px;
+      top: 150px;
     }
 
+    .stats-title {
+      color: #d32f2f;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .error-count-display {
+      font-size: 48px;
+      font-weight: bold;
+      color: #d32f2f;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    #error-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .error-badge {
+      background-color: #ffebee;
+      color: #c62828;
+      border: 1px solid #ffcdd2;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Responsividade para telas menores: Painel vai para baixo */
+    @media (max-width: 1100px) {
+      #stats-panel {
+        position: static;
+        width: 100%;
+        max-width: 400px;
+        margin: 20px auto;
+      }
+      .main-container {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div id="home" class="page" style="display:block;">
-    <h1>Treinos de Japonês</h1>
-    <div class="menu">
-      <button onclick="showPage('hiragana')">Hiragana</button>
-      <button onclick="showPage('katakana')">Katakana</button>
-      <button onclick="showPage('numeros')">Números (1–10)</button>
-      <button onclick="window.location.href='numeros.html'">
-          Números (1-100)
-      </button>
-      <button onclick="window.location.href='vocabulario.html'">
-          Flashcards de Vocabulário
-      </button>
+<div class="main-container">
+  
+  <div class="content-area">
+
+    <div id="home" class="page" style="display:block;">
+      <h1 style="color:#333;">Treinos de Japonês</h1>
+      <div class="menu">
+        <button onclick="showPage('hiragana')">Hiragana</button>
+        <button onclick="showPage('katakana')">Katakana</button>
+        <button onclick="showPage('numeros')">Números (1–10)</button>
+        <button onclick="window.location.href='numeros.html'" style="background-color: #6c757d;">Números (1-100)</button>
+        <button onclick="window.location.href='vocabulario.html'" style="background-color: #28a745;">Flashcards de Vocabulário</button>
+      </div>
     </div>
+
+    <div id="hiragana" class="page">
+      <h2>Selecione os Hiragana</h2>
+      
+      <div class="selection-controls">
+        <button onclick="toggleAll('table-container', true)">Selecionar Todos</button>
+        <button onclick="toggleAll('table-container', false)">Limpar Todos</button>
+      </div>
+
+      <div id="table-container"></div>
+      <br> 
+      <button id="start-hira" class="menu" style="width: 200px; padding: 10px; margin: 0 auto; display:block;">Iniciar treino</button>
+      <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
+      <div id="app-hira" style="display:none;">
+        <div class="kana" id="kana-hira"></div>
+        <input id="answer-hira" placeholder="romanização..." autocomplete="off">
+        <p id="feedback-hira"></p>
+      </div>
+
+      <br><br>
+      <button onclick="goBack()" style="cursor:pointer; padding: 10px 20px;">Voltar</button>
+    </div>
+
+    <div id="katakana" class="page">
+      <h2>Selecione os Katakana</h2>
+      
+      <div class="selection-controls">
+        <button onclick="toggleAll('table-kata', true)">Selecionar Todos</button>
+        <button onclick="toggleAll('table-kata', false)">Limpar Todos</button>
+      </div>
+
+      <div id="table-kata"></div>
+      <br>
+      <button id="start-kata" class="menu" style="width: 200px; padding: 10px; margin: 0 auto; display:block;">Iniciar treino</button>
+      <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
+      <div id="app-kata" style="display:none;">
+        <div class="kana" id="kana-kata"></div>
+        <input id="answer-kata" placeholder="romanização..." autocomplete="off">
+        <p id="feedback-kata"></p>
+      </div>
+
+      <br><br>
+      <button onclick="goBack()" style="cursor:pointer; padding: 10px 20px;">Voltar</button>
+    </div>
+
+    <div id="numeros" class="page">
+      <h2>Treino de Números (1–10)</h2>
+
+      <button id="start-num" class="menu" style="width: 200px; padding: 10px; margin: 0 auto; display:block;">Iniciar treino</button>
+
+      <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
+      <div id="app-num" style="display:none;">
+        <div class="kana" id="kana-num"></div>
+        <input id="answer-num" placeholder="romanização..." autocomplete="off">
+        <p id="feedback-num"></p>
+      </div>
+
+      <br><br>
+      <button onclick="goBack()" style="cursor:pointer; padding: 10px 20px;">Voltar</button>
+    </div>
+
+  </div> <div id="stats-panel">
+    <div class="stats-title">Erros na Sessão</div>
+    <div id="error-count" class="error-count-display">0</div>
+    <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Letras erradas:</div>
+    <div id="error-list"></div>
   </div>
 
-  <div id="hiragana" class="page">
-    <h2>Selecione os Hiragana</h2>
-    
-    <div class="selection-controls">
-      <button onclick="toggleAll('table-container', true)">Selecionar Todos</button>
-      <button onclick="toggleAll('table-container', false)">Limpar Todos</button>
-    </div>
-
-    <div id="table-container"></div>
-    <br> <button id="start-hira">Iniciar treino</button>
-    <hr>
-
-    <div id="app-hira" style="display:none;">
-      <div class="kana" id="kana-hira"></div>
-      <input id="answer-hira" placeholder="romanização..." autocomplete="off">
-      <p id="feedback-hira"></p>
-    </div>
-
-    <button onclick="showPage('home')">Voltar</button>
-  </div>
-
-  <div id="katakana" class="page">
-    <h2>Selecione os Katakana</h2>
-    
-    <div class="selection-controls">
-      <button onclick="toggleAll('table-kata', true)">Selecionar Todos</button>
-      <button onclick="toggleAll('table-kata', false)">Limpar Todos</button>
-    </div>
-
-    <div id="table-kata"></div>
-    <br>
-    <button id="start-kata">Iniciar treino</button>
-    <hr>
-
-    <div id="app-kata" style="display:none;">
-      <div class="kana" id="kana-kata"></div>
-      <input id="answer-kata" placeholder="romanização..." autocomplete="off">
-      <p id="feedback-kata"></p>
-    </div>
-
-    <button onclick="showPage('home')">Voltar</button>
-  </div>
-
-  <div id="numeros" class="page">
-    <h2>Treino de Números (1–10)</h2>
-
-    <button id="start-num">Iniciar treino</button>
-
-    <hr>
-
-    <div id="app-num" style="display:none;">
-      <div class="kana" id="kana-num"></div>
-      <input id="answer-num" placeholder="romanização..." autocomplete="off">
-      <p id="feedback-num"></p>
-    </div>
-
-    <button onclick="showPage('home')">Voltar</button>
-  </div>
-
-
-
-<script>
+</div> <script>
 // --- Controle de páginas ---
 function showPage(id) {
   document.querySelectorAll(".page").forEach(p => p.style.display = "none");
   document.getElementById(id).style.display = "block";
+  // Esconde o painel de stats ao navegar entre menus, ele só aparece ao iniciar treino
+  document.getElementById("stats-panel").style.display = "none";
 }
 
-// --- NOVA FUNÇÃO: Selecionar/Desmarcar Todos ---
+function goBack() {
+  showPage('home');
+  // Esconde apps ativos
+  document.getElementById('app-hira').style.display = 'none';
+  document.getElementById('app-kata').style.display = 'none';
+  document.getElementById('app-num').style.display = 'none';
+}
+
 function toggleAll(containerId, state) {
   const container = document.getElementById(containerId);
   const checkboxes = container.querySelectorAll('input[type="checkbox"]');
@@ -146,7 +262,38 @@ function toggleAll(containerId, state) {
 }
 
 
-// ------------ TABELAS BASE (HIRAGANA E KATAKANA) -------------------
+// --- LÓGICA DE ESTATÍSTICAS (NOVO) ---
+let sessionErrors = 0;
+let sessionWrongList = [];
+
+function resetStats() {
+  sessionErrors = 0;
+  sessionWrongList = [];
+  updateStatsUI();
+  document.getElementById("stats-panel").style.display = "block"; // Mostra o painel
+}
+
+function registerError(char) {
+  sessionErrors++;
+  sessionWrongList.push(char);
+  updateStatsUI();
+}
+
+function updateStatsUI() {
+  document.getElementById("error-count").textContent = sessionErrors;
+  
+  const listEl = document.getElementById("error-list");
+  listEl.innerHTML = ""; // Limpa
+  sessionWrongList.forEach(char => {
+    const badge = document.createElement("span");
+    badge.className = "error-badge";
+    badge.textContent = char;
+    listEl.appendChild(badge);
+  });
+}
+
+
+// ------------ DADOS E TABELAS -------------------
 
 const VOGAIS = ["A","I","U","E","O"];
 
@@ -161,7 +308,7 @@ const HIRAGANA_TABLE = {
   "Y": { "A":"や",       "U":"ゆ",       "O":"よ" },
   "R": { "A":"ら","I":"り","U":"る","E":"れ","O":"ろ" },
   "W": { "A":"わ",                     "O":"を" },
-  "N (Final)": { "A":"ん" } // Adicionei o N final que as vezes falta, se quiser tirar é só apagar essa linha
+  "N (Final)": { "A":"ん" }
 };
 
 const KATAKANA_TABLE = {
@@ -178,45 +325,26 @@ const KATAKANA_TABLE = {
   "N (Final)": { "A":"ン" }
 };
 
-// --- ROMAJI MAP (apenas 1 mapa para ambos) ---
 const ROMAJI_MAP = {};
 
 // Preencher com hiragana
 for (const cons in HIRAGANA_TABLE) {
   for (const vow in HIRAGANA_TABLE[cons]) {
-    ROMAJI_MAP[HIRAGANA_TABLE[cons][vow]] = (cons + vow).toLowerCase().replace("(final)a", ""); // hack pro N
+    ROMAJI_MAP[HIRAGANA_TABLE[cons][vow]] = (cons + vow).toLowerCase().replace("(final)a", ""); 
   }
 }
-// Ajuste manual pro N
-ROMAJI_MAP["ん"] = "n";
-ROMAJI_MAP["ン"] = "n";
-
-
-// Casos especiais hiragana
-ROMAJI_MAP["し"] = "shi";
-ROMAJI_MAP["ち"] = "chi";
-ROMAJI_MAP["つ"] = "tsu";
-ROMAJI_MAP["ふ"] = "fu";
-ROMAJI_MAP["を"] = "wo";
+ROMAJI_MAP["ん"] = "n"; ROMAJI_MAP["ン"] = "n";
+ROMAJI_MAP["し"] = "shi"; ROMAJI_MAP["ち"] = "chi"; ROMAJI_MAP["つ"] = "tsu"; ROMAJI_MAP["ふ"] = "fu"; ROMAJI_MAP["を"] = "wo";
 
 // Preencher com katakana
 for (const cons in KATAKANA_TABLE) {
   for (const vow in KATAKANA_TABLE[cons]) {
-    // Se não for o N, adiciona
     if(KATAKANA_TABLE[cons][vow] !== "ン")
         ROMAJI_MAP[KATAKANA_TABLE[cons][vow]] = (cons + vow).toLowerCase();
   }
 }
-// Casos especiais katakana
-ROMAJI_MAP["シ"] = "shi";
-ROMAJI_MAP["チ"] = "chi";
-ROMAJI_MAP["ツ"] = "tsu";
-ROMAJI_MAP["フ"] = "fu";
-ROMAJI_MAP["ヲ"] = "wo";
+ROMAJI_MAP["シ"] = "shi"; ROMAJI_MAP["チ"] = "chi"; ROMAJI_MAP["ツ"] = "tsu"; ROMAJI_MAP["フ"] = "fu"; ROMAJI_MAP["ヲ"] = "wo";
 
-
-
-// --- Shuffle ---
 function shuffle(array) {
   for (let i = array.length -1; i>0; i--){
     const j = Math.floor(Math.random()*(i+1));
@@ -225,10 +353,9 @@ function shuffle(array) {
   return array;
 }
 
-// --- Tabela de Hiragana ---
+// Render Hiragana Table
 const contHira = document.getElementById("table-container");
 const tableHira = document.createElement("table");
-
 let head = document.createElement("tr");
 head.appendChild(document.createElement("th"));
 VOGAIS.forEach(v => {
@@ -237,13 +364,11 @@ VOGAIS.forEach(v => {
   head.appendChild(th);
 });
 tableHira.appendChild(head);
-
 for (const cons in HIRAGANA_TABLE) {
   const tr = document.createElement("tr");
   const th = document.createElement("th");
-  th.textContent = cons.replace(" (Final)", ""); // Limpa o texto da tabela
+  th.textContent = cons.replace(" (Final)", ""); 
   tr.appendChild(th);
-
   VOGAIS.forEach(v => {
     const td = document.createElement("td");
     if (HIRAGANA_TABLE[cons][v]) {
@@ -251,16 +376,13 @@ for (const cons in HIRAGANA_TABLE) {
     }
     tr.appendChild(td);
   });
-
   tableHira.appendChild(tr);
 }
 contHira.appendChild(tableHira);
 
-
-// --- Tabela de Katakana ---
+// Render Katakana Table
 const contKata = document.getElementById("table-kata");
 const tableKata = document.createElement("table");
-
 let head2 = document.createElement("tr");
 head2.appendChild(document.createElement("th"));
 VOGAIS.forEach(v => {
@@ -269,13 +391,11 @@ VOGAIS.forEach(v => {
   head2.appendChild(th);
 });
 tableKata.appendChild(head2);
-
 for (const cons in KATAKANA_TABLE) {
   const tr = document.createElement("tr");
   const th = document.createElement("th");
   th.textContent = cons.replace(" (Final)", "");
   tr.appendChild(th);
-
   VOGAIS.forEach(v => {
     const td = document.createElement("td");
     if (KATAKANA_TABLE[cons][v]) {
@@ -283,7 +403,6 @@ for (const cons in KATAKANA_TABLE) {
     }
     tr.appendChild(td);
   });
-
   tableKata.appendChild(tr);
 }
 contKata.appendChild(tableKata);
@@ -295,14 +414,17 @@ let hiraIdx = 0;
 
 document.getElementById("start-hira").onclick = () => {
   hiraSel = [...document.querySelectorAll("#table-container input:checked")].map(x => x.value);
-
-  if (hiraSel.length === 0) {
-    alert("Selecione pelo menos 1 hiragana!");
-    return;
-  }
-
+  if (hiraSel.length === 0) { alert("Selecione pelo menos 1 hiragana!"); return; }
+  
   hiraSel = shuffle(hiraSel);
   hiraIdx = 0;
+  
+  // Reseta estatísticas e esconde tabelas
+  resetStats();
+  document.getElementById("table-container").style.display = "none";
+  document.querySelector(".selection-controls").style.display = "none";
+  document.getElementById("start-hira").style.display = "none";
+  document.querySelector("#hiragana h2").textContent = "Treino Hiragana";
 
   document.getElementById("app-hira").style.display = "block";
   showHira();
@@ -312,18 +434,17 @@ function showHira() {
   document.getElementById("feedback-hira").textContent = "";
   document.getElementById("answer-hira").value = "";
   document.getElementById("kana-hira").textContent = hiraSel[hiraIdx];
-  document.getElementById("answer-hira").focus(); // Foca no input automaticamente
+  document.getElementById("answer-hira").focus(); 
 }
 
 document.getElementById("answer-hira").addEventListener("keyup", e => {
   if (e.key !== "Enter") return;
-
   const cur = hiraSel[hiraIdx];
   const ok = ROMAJI_MAP[cur];
-
+  
   if (e.target.value.trim().toLowerCase() === ok) {
     document.getElementById("feedback-hira").textContent = "✔️ Correto!";
-    document.getElementById("feedback-hira").style.color = "green"; // Corzinha
+    document.getElementById("feedback-hira").style.color = "green";
     hiraIdx++;
     if (hiraIdx >= hiraSel.length) {
       document.getElementById("feedback-hira").textContent = "🎉 Fim!";
@@ -334,6 +455,11 @@ document.getElementById("answer-hira").addEventListener("keyup", e => {
   } else {
     document.getElementById("feedback-hira").textContent = "❌ Errado!";
     document.getElementById("feedback-hira").style.color = "red";
+    
+    // --- REGISTRA ERRO ---
+    registerError(cur);
+    // Limpa o input pra tentar de novo
+    e.target.value = ""; 
   }
 });
 
@@ -344,14 +470,17 @@ let kataIdx = 0;
 
 document.getElementById("start-kata").onclick = () => {
   kataSel = [...document.querySelectorAll("#table-kata input:checked")].map(x => x.value);
-
-  if (kataSel.length === 0) {
-    alert("Selecione pelo menos 1 katakana!");
-    return;
-  }
-
+  if (kataSel.length === 0) { alert("Selecione pelo menos 1 katakana!"); return; }
+  
   kataSel = shuffle(kataSel);
   kataIdx = 0;
+
+  // Reseta estatísticas e UI
+  resetStats();
+  document.getElementById("table-kata").style.display = "none";
+  document.querySelector("#katakana .selection-controls").style.display = "none";
+  document.getElementById("start-kata").style.display = "none";
+  document.querySelector("#katakana h2").textContent = "Treino Katakana";
 
   document.getElementById("app-kata").style.display = "block";
   showKata();
@@ -366,7 +495,6 @@ function showKata() {
 
 document.getElementById("answer-kata").addEventListener("keyup", e => {
   if (e.key !== "Enter") return;
-
   const cur = kataSel[kataIdx];
   const ok = ROMAJI_MAP[cur];
 
@@ -383,6 +511,9 @@ document.getElementById("answer-kata").addEventListener("keyup", e => {
   } else {
     document.getElementById("feedback-kata").textContent = "❌ Errado!";
     document.getElementById("feedback-kata").style.color = "red";
+    // --- REGISTRA ERRO ---
+    registerError(cur);
+    e.target.value = "";
   }
 });
 
@@ -390,16 +521,11 @@ document.getElementById("answer-kata").addEventListener("keyup", e => {
 // ------------------ TREINO DE NÚMEROS --------------------
 
 const NUMS = [
-  { jp: "一 (1)", romaji: "ichi" },
-  { jp: "二 (2)", romaji: "ni" },
-  { jp: "三 (3)", romaji: "san" },
-  { jp: "四 (4)", romaji: "yon" },
-  { jp: "五 (5)", romaji: "go" },
-  { jp: "六 (6)", romaji: "roku" },
-  { jp: "七 (7)", romaji: "nana" },
-  { jp: "八 (8)", romaji: "hachi" },
-  { jp: "九 (9)", romaji: "kyuu" },
-  { jp: "十 (10)", romaji: "juu" }
+  { jp: "一 (1)", romaji: "ichi" }, { jp: "二 (2)", romaji: "ni" },
+  { jp: "三 (3)", romaji: "san" },  { jp: "四 (4)", romaji: "yon" },
+  { jp: "五 (5)", romaji: "go" },   { jp: "六 (6)", romaji: "roku" },
+  { jp: "七 (7)", romaji: "nana" }, { jp: "八 (8)", romaji: "hachi" },
+  { jp: "九 (9)", romaji: "kyuu" }, { jp: "十 (10)", romaji: "juu" }
 ];
 
 let numsList = [];
@@ -408,6 +534,10 @@ let numIndex = 0;
 document.getElementById("start-num").onclick = () => {
   numsList = shuffle([...NUMS]);
   numIndex = 0;
+  
+  resetStats();
+  document.getElementById("start-num").style.display = "none";
+  
   document.getElementById("app-num").style.display = "block";
   showNum();
 };
@@ -421,9 +551,7 @@ function showNum() {
 
 document.getElementById("answer-num").addEventListener("keyup", (e) => {
   if (e.key !== "Enter") return;
-
   const current = numsList[numIndex];
-
   if (e.target.value.trim().toLowerCase() === current.romaji) {
     document.getElementById("feedback-num").textContent = "✔️ Correto!";
     document.getElementById("feedback-num").style.color = "green";
@@ -437,6 +565,10 @@ document.getElementById("answer-num").addEventListener("keyup", (e) => {
   } else {
     document.getElementById("feedback-num").textContent = "❌ Errado!";
     document.getElementById("feedback-num").style.color = "red";
+    // --- REGISTRA ERRO ---
+    // Para números, vamos registrar o kanji
+    registerError(current.jp);
+    e.target.value = "";
   }
 });
 </script>
