@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Treino de Palavras</title>
+  <style>
+    /* --- MESMO CSS DO SEU ORIGINAL (Para manter o padrão) --- */
+    body { font-family: sans-serif; text-align: center; margin: 40px; }
+    
+    /* Ajuste para palavras: Fonte menor que o kana isolado (80px vs 120px) */
+    .kana-word { 
+      font-size: 80px; 
+      font-weight: bold;
+      margin: 30px 0; 
+      display: block;
+      word-wrap: break-word;
+    }
+
+    input {
+      display: block;      
+      margin: 10px auto;   
+      text-align: center;  
+      width: 200px;        
+      padding: 10px;
+      font-size: 18px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 20px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button:hover { background-color: #e0e0e0; }
+
+    #feedback { font-size: 20px; margin-top: 10px; height: 24px; font-weight: bold; }
+    
+    /* Painel de Erros (Igual ao original) */
+    .error-panel {
+      position: fixed; right: 20px; top: 20px;
+      width: 150px; padding: 15px;
+      background: #fff; border: 2px solid #d32f2f;
+      border-radius: 8px; text-align: center;
+      display: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .error-title { color: #d32f2f; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+    .error-count { font-size: 40px; font-weight: bold; color: #d32f2f; display: block; }
+    .error-list { font-size: 18px; color: #333; margin-top: 5px; word-wrap: break-word; }
+  </style>
+</head>
+<body>
+
+  <div id="stats-panel" class="error-panel">
+    <div class="error-title">Erros</div>
+    <span id="global-error-count" class="error-count">0</span>
+    <div class="error-title" style="border-top:1px solid #eee; margin-top:5px;">Palavras:</div>
+    <div id="global-error-list" class="error-list"></div>
+  </div>
+
+  <h1>Treino de Palavras (Simples)</h1>
+  <p>Traduza para Romanji (Ex: <em>neko, sushi, kamera</em>)</p>
+  
+  <div id="game-area">
+    <div class="kana-word" id="word-display">...</div>
+    <input id="answer-input" placeholder="Digite em romanji..." autocomplete="off">
+    <p id="feedback"></p>
+    
+    <button id="btn-start" onclick="startGame()">Começar / Reiniciar</button>
+  </div>
+
+  <br><hr><br>
+  <button onclick="window.location.href='index.html'">Voltar para o Menu</button>
+
+<script>
+// --- LISTA DE PALAVRAS (Pode adicionar mais aqui, meu consagrado) ---
+const WORDS = [
+  { jp: "ねこ", romaji: "neko" },       // Gato
+  { jp: "いぬ", romaji: "inu" },        // Cachorro
+  { jp: "やま", romaji: "yama" },       // Montanha
+  { jp: "みず", romaji: "mizu" },       // Água
+  { jp: "さくら", romaji: "sakura" },   // Cerejeira
+  { jp: "すし", romaji: "sushi" },      // Sushi
+  { jp: "くるま", romaji: "kuruma" },   // Carro
+  { jp: "カメラ", romaji: "kamera" },   // Câmera (Kata)
+  { jp: "バス", romaji: "basu" },       // Ônibus (Kata)
+  { jp: "パン", romaji: "pan" },        // Pão (Kata)
+  { jp: "トイレ", romaji: "toire" },    // Banheiro (Kata)
+  { jp: "ホテル", romaji: "hoteru" },   // Hotel (Kata)
+  { jp: "シャツ", romaji: "shatsu" },   // Camisa (Kata)
+  { jp: "テスト", romaji: "tesuto" },   // Teste (Kata)
+  { jp: "クラス", romaji: "kurasu" },   // Classe (Kata)
+  { jp: "ごはん", romaji: "gohan" },    // Arroz
+  { jp: "えき", romaji: "eki" }         // Estação
+];
+
+let gameList = [];
+let currentIndex = 0;
+let errorCount = 0;
+let errorList = [];
+
+// --- Função de Embaralhar ---
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// --- Iniciar Jogo ---
+function startGame() {
+  gameList = shuffle([...WORDS]); // Clona e mistura
+  currentIndex = 0;
+  
+  // Reseta erros
+  errorCount = 0;
+  errorList = [];
+  updateErrorPanel();
+  document.getElementById("stats-panel").style.display = "block";
+
+  showWord();
+}
+
+// --- Mostrar Palavra ---
+function showWord() {
+  if (currentIndex >= gameList.length) {
+    document.getElementById("word-display").textContent = "Fim!";
+    document.getElementById("feedback").textContent = "🎉 Parabéns, acabou!";
+    document.getElementById("answer-input").style.display = "none";
+    return;
+  }
+
+  const currentItem = gameList[currentIndex];
+  document.getElementById("word-display").textContent = currentItem.jp;
+  
+  const input = document.getElementById("answer-input");
+  input.style.display = "block";
+  input.value = "";
+  input.focus();
+  document.getElementById("feedback").textContent = "";
+}
+
+// --- Verificar Resposta ---
+document.getElementById("answer-input").addEventListener("keyup", function(e) {
+  if (e.key !== "Enter") return;
+
+  const typed = e.target.value.trim().toLowerCase();
+  const correct = gameList[currentIndex].romaji;
+
+  if (typed === correct) {
+    // Acertou
+    document.getElementById("feedback").textContent = "✔️ Correto!";
+    document.getElementById("feedback").style.color = "green";
+    
+    currentIndex++;
+    setTimeout(showWord, 600); // Espera um pouquinho pra mudar
+  } else {
+    // Errou
+    document.getElementById("feedback").textContent = "❌ Errado! Tente de novo.";
+    document.getElementById("feedback").style.color = "red";
+    e.target.value = ""; // Limpa pra tentar de novo
+    
+    // Registra erro (só se ainda não registrou essa palavra nesta rodada)
+    // Mas a logica simples aqui é registrar toda vez que erra
+    registerError(gameList[currentIndex].jp);
+  }
+});
+
+// --- Painel de Erros ---
+function registerError(word) {
+  errorCount++;
+  // Adiciona na lista se não estiver repetido visualmente, ou sempre adiciona, vc decide.
+  // Vou deixar simples: adiciona na lista visual
+  errorList.push(word);
+  updateErrorPanel();
+}
+
+function updateErrorPanel() {
+  document.getElementById("global-error-count").textContent = errorCount;
+  // Mostra apenas as ultimas 5 palavras erradas pra não quebrar o layout se errar muito
+  const displayList = errorList.slice(-5).join(", "); 
+  document.getElementById("global-error-list").textContent = displayList + (errorList.length > 5 ? "..." : "");
+}
+
+// Começa com o campo escondido até apertar o botão
+document.getElementById("answer-input").style.display = "none";
+
+</script>
+</body>
+</html>
