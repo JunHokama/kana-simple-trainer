@@ -607,5 +607,221 @@
     "romanji": "Musume wa hassai desu",
     "hiragana/kanji": "娘は8歳です",
     "tradução": "Minha filha tem 8 anos"
+  },
+  {
+    "id": 88,
+    "is_deleted": false,
+    "romanji": "Kazoku",
+    "hiragana/kanji": "家族",
+    "tradução": "Família",
+    "aula": 4
+  },
+  {
+    "id": 89,
+    "is_deleted": false,
+    "romanji": "Watashi",
+    "hiragana/kanji": "私",
+    "tradução": "Eu",
+    "aula": 4
+  },
+  {
+    "id": 90,
+    "is_deleted": false,
+    "romanji": "Chichi",
+    "hiragana/kanji": "父",
+    "tradução": "Pai (meu)",
+    "aula": 4
+  },
+  {
+    "id": 91,
+    "is_deleted": false,
+    "romanji": "Haha",
+    "hiragana/kanji": "母",
+    "tradução": "Mãe (minha)",
+    "aula": 4
+  },
+  {
+    "id": 92,
+    "is_deleted": false,
+    "romanji": "Ani",
+    "hiragana/kanji": "兄",
+    "tradução": "Irmão mais velho (meu)",
+    "aula": 4
+  },
+  {
+    "id": 93,
+    "is_deleted": false,
+    "romanji": "Ane",
+    "hiragana/kanji": "姉",
+    "tradução": "Irmã mais velha (minha)",
+    "aula": 4
+  },
+  {
+    "id": 94,
+    "is_deleted": false,
+    "romanji": "Otouto",
+    "hiragana/kanji": "弟",
+    "tradução": "Irmão mais novo",
+    "aula": 4
+  },
+  {
+    "id": 95,
+    "is_deleted": false,
+    "romanji": "Imouto",
+    "hiragana/kanji": "妹",
+    "tradução": "Irmã mais nova",
+    "aula": 4
+  },
+  {
+    "id": 96,
+    "is_deleted": false,
+    "romanji": "Otto",
+    "hiragana/kanji": "夫",
+    "tradução": "Marido (meu)",
+    "aula": 4
+  },
+  {
+    "id": 97,
+    "is_deleted": false,
+    "romanji": "Tsuma",
+    "hiragana/kanji": "妻",
+    "tradução": "Esposa (minha)",
+    "aula": 4
+  },
+  {
+    "id": 98,
+    "is_deleted": false,
+    "romanji": "Kodomo",
+    "hiragana/kanji": "子ども",
+    "tradução": "Filho(a) / Criança",
+    "aula": 4
+  },
+  {
+    "id": 99,
+    "is_deleted": false,
+    "romanji": "Tomodachi",
+    "hiragana/kanji": "友だち",
+    "tradução": "Amigo(a)",
+    "aula": 4
+  },
+  {
+    "id": 100,
+    "is_deleted": false,
+    "romanji": "Koibito",
+    "hiragana/kanji": "恋人",
+    "tradução": "Namorado(a) / Parceiro(a)",
+    "aula": 4
+  },
+  {
+    "id": 101,
+    "is_deleted": false,
+    "romanji": "Petto",
+    "hiragana/kanji": "ペット",
+    "tradução": "Animal de estimação",
+    "aula": 4
+  },
+  {
+    "id": 102,
+    "is_deleted": false,
+    "romanji": "Sunde imasu",
+    "hiragana/kanji": "住んでいます",
+    "tradução": "Morando / Mora em...",
+    "aula": 4
+  },
+  {
+    "id": 103,
+    "is_deleted": false,
+    "romanji": "Nansai",
+    "hiragana/kanji": "何歳",
+    "tradução": "Quantos anos?",
+    "aula": 4
+  },
+  {
+    "id": 104,
+    "is_deleted": false,
+    "romanji": "Hatachi",
+    "hiragana/kanji": "二十歳 / はたち",
+    "tradução": "20 anos de idade",
+    "aula": 4
+  },
+  {
+    "id": 105,
+    "is_deleted": false,
+    "romanji": "Dare",
+    "hiragana/kanji": "だれ",
+    "tradução": "Quem?",
+    "aula": 4
+  },
+  {
+    "id": 106,
+    "is_deleted": false,
+    "romanji": "Tabemono",
+    "hiragana/kanji": "食べ物",
+    "tradução": "Comida / Alimento",
+    "aula": 5
+  },
+  {
+    "id": 107,
+    "is_deleted": false,
+    "romanji": "Suki",
+    "hiragana/kanji": "好き",
+    "tradução": "Gostar / Preferido",
+    "aula": 5
+  },
+  {
+    "id": 108,
+    "is_deleted": false,
+    "romanji": "Kirai",
+    "hiragana/kanji": "嫌い",
+    "tradução": "Não gostar / Odiar",
+    "aula": 5
+  },
+  {
+    "id": 109,
+    "is_deleted": false,
+    "romanji": "Udon",
+    "hiragana/kanji": "うどん",
+    "tradução": "Udon (macarrão grosso)",
+    "aula": 5
+  },
+  {
+    "id": 110,
+    "is_deleted": false,
+    "romanji": "Sakana",
+    "hiragana/kanji": "魚",
+    "tradução": "Peixe",
+    "aula": 5
+  },
+  {
+    "id": 111,
+    "is_deleted": false,
+    "romanji": "Niku",
+    "hiragana/kanji": "肉",
+    "tradução": "Carne",
+    "aula": 5
+  },
+  {
+    "id": 112,
+    "is_deleted": false,
+    "romanji": "Yasai",
+    "hiragana/kanji": "野菜",
+    "tradução": "Legumes / Verduras",
+    "aula": 5
+  },
+  {
+    "id": 113,
+    "is_deleted": false,
+    "romanji": "Hirugohan",
+    "hiragana/kanji": "昼ご飯",
+    "tradução": "Almoço",
+    "aula": 5
+  },
+  {
+    "id": 114,
+    "is_deleted": false,
+    "romanji": "Shokudou",
+    "hiragana/kanji": "食堂",
+    "tradução": "Refeitório / Cantina",
+    "aula": 5
   }
 ]

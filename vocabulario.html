@@ -39,11 +39,28 @@
             letter-spacing: 0.2rem; 
             text-transform: uppercase; 
             font-size: 0.8rem;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             opacity: 0.6;
         }
 
-        /* O Flashcard */
+        /* Novo Estilo para o Seletor de Aula */
+        .filter-container {
+            margin-bottom: 25px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: white;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.8rem;
+            color: var(--ink);
+            outline: none;
+            cursor: pointer;
+        }
+
         .flashcard-wrapper {
             perspective: 1200px;
             width: 100%;
@@ -81,10 +98,9 @@
 
         .back { transform: rotateY(180deg); }
 
-        /* Estilos de Texto com Ajuste Dinâmico */
         #txt-kanji { 
             font-family: 'Noto Serif JP', serif;
-            font-size: 4.5rem; /* Padrão para palavras curtas */
+            font-size: 4.5rem;
             color: var(--accent);
             line-height: 1.2;
             margin: 0;
@@ -93,7 +109,6 @@
             max-width: 100%;
         }
 
-        /* Classes auxiliares para frases longas */
         #txt-kanji.medium { font-size: 2.8rem; }
         #txt-kanji.small { font-size: 1.8rem; }
 
@@ -125,9 +140,8 @@
             letter-spacing: 1px;
         }
 
-        /* Botões */
         .nav-buttons { 
-            margin-top: 40px; 
+            margin-top: 30px; 
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -161,8 +175,17 @@
 
     <div class="container">
         <h2>Flashcards</h2>
+
+        <div class="filter-container">
+            <select id="aula-select">
+                <option value="todos">Todas as Palavras</option>
+                <option value="0">Vocabulário Geral (1-87)</option>
+                <option value="4">Aula 4 - Família</option>
+                <option value="5">Aula 5 - Comida</option>
+            </select>
+        </div>
         
-        <div class="flashcard-wrapper" onclick="this.querySelector('.flashcard').classList.toggle('flipped')">
+        <div class="flashcard-wrapper" onclick="document.getElementById('card').classList.toggle('flipped')">
             <div class="flashcard" id="card">
                 <div class="front">
                     <div id="txt-romaji">---</div>
@@ -178,14 +201,13 @@
         
         <div class="nav-buttons">
             <button id="next-btn">Próxima Palavra</button>
-            <button class="btn-voltar" onclick="window.history.back()">
-                Voltar
-            </button>
+            <button class="btn-voltar" onclick="window.history.back()">Voltar</button>
         </div>
     </div>
 
     <script>
-        let flashcards = [];
+        let todosOsDados = []; 
+        let flashcardsFiltrados = [];
         let indexAtual = 0;
 
         const cardElement = document.getElementById('card');
@@ -193,18 +215,13 @@
         const txtKanji = document.getElementById('txt-kanji');
         const txtTraducao = document.getElementById('txt-traducao');
         const nextBtn = document.getElementById('next-btn');
+        const aulaSelect = document.getElementById('aula-select');
 
         async function carregarDados() {
             try {
-                // Certifique-se que o arquivo dados.json está na mesma pasta
                 const response = await fetch('dados.json');
-                const data = await response.json();
-                
-                flashcards = data
-                    .filter(item => !item.is_deleted)
-                    .sort(() => Math.random() - 0.5);
-
-                if(flashcards.length > 0) exibirCard();
+                todosOsDados = await response.json();
+                filtrarPalavras(); 
             } catch (erro) {
                 console.error("Erro:", erro);
                 txtKanji.innerText = "Erro ao carregar";
@@ -212,31 +229,53 @@
             }
         }
 
+        function filtrarPalavras() {
+            const aulaSelecionada = aulaSelect.value;
+            
+            flashcardsFiltrados = todosOsDados.filter(item => {
+                if (item.is_deleted) return false;
+                
+                // Opção TODAS
+                if (aulaSelecionada === "todos") return true;
+                
+                // Opção GERAL (1-87)
+                if (aulaSelecionada === "0") {
+                    return !item.aula || item.aula === 0;
+                }
+                
+                // Opção AULA ESPECÍFICA (4 ou 5)
+                return item.aula == aulaSelecionada;
+            });
+
+            // Embaralha
+            flashcardsFiltrados.sort(() => Math.random() - 0.5);
+            
+            indexAtual = 0;
+            exibirCard();
+        }
+
         function exibirCard() {
-            if (flashcards.length === 0) return;
+            if (flashcardsFiltrados.length === 0) {
+                txtRomanji.innerText = "";
+                txtKanji.innerText = "Vazio";
+                txtTraducao.innerText = "Nenhuma palavra nesta aula.";
+                return;
+            }
 
             cardElement.classList.remove('flipped');
 
             setTimeout(() => {
-                const item = flashcards[indexAtual];
+                const item = flashcardsFiltrados[indexAtual];
                 const kanjiText = item['hiragana/kanji'] || "";
                 const tradText = item.tradução || "";
 
-                // Ajuste de fonte para o Japonês
                 txtKanji.classList.remove('medium', 'small');
-                if (kanjiText.length > 12) {
-                    txtKanji.classList.add('small');
-                } else if (kanjiText.length > 6) {
-                    txtKanji.classList.add('medium');
-                }
+                if (kanjiText.length > 12) txtKanji.classList.add('small');
+                else if (kanjiText.length > 6) txtKanji.classList.add('medium');
 
-                // Ajuste de fonte para a Tradução
                 txtTraducao.classList.remove('medium', 'small');
-                if (tradText.length > 50) {
-                    txtTraducao.classList.add('small');
-                } else if (tradText.length > 20) {
-                    txtTraducao.classList.add('medium');
-                }
+                if (tradText.length > 50) txtTraducao.classList.add('small');
+                else if (tradText.length > 20) txtTraducao.classList.add('medium');
 
                 txtRomanji.innerText = item.romanji;
                 txtKanji.innerText = kanjiText;
@@ -244,11 +283,16 @@
             }, 150);
         }
 
+        // Eventos
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation(); 
-            indexAtual = (indexAtual + 1) % flashcards.length;
-            exibirCard();
+            if (flashcardsFiltrados.length > 0) {
+                indexAtual = (indexAtual + 1) % flashcardsFiltrados.length;
+                exibirCard();
+            }
         });
+
+        aulaSelect.addEventListener('change', filtrarPalavras);
 
         carregarDados();
     </script>
