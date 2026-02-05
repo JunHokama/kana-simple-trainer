@@ -823,5 +823,13 @@
     "hiragana/kanji": "食堂",
     "tradução": "Refeitório / Cantina",
     "aula": 5
+  },
+  {
+    "id": 115,
+    "is_deleted": false,
+    "romanji": "Suki desu ka?",
+    "hiragana/kanji": "好きですか？",
+    "tradução": "Você gosta?",
+    "aula": 5
   }
 ]
