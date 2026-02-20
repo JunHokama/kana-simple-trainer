@@ -831,5 +831,349 @@
     "hiragana/kanji": "好きですか？",
     "tradução": "Você gosta?",
     "aula": 5
+  },
+  {
+    "id": 116,
+    "is_deleted": false,
+    "romanji": "Gohan",
+    "hiragana/kanji": "ご飯",
+    "tradução": "Arroz (cozido) / Refeição",
+    "aula": 5
+  },
+  {
+    "id": 117,
+    "is_deleted": false,
+    "romanji": "Asagohan",
+    "hiragana/kanji": "朝ご飯",
+    "tradução": "Café da manhã",
+    "aula": 5
+  },
+  {
+    "id": 118,
+    "is_deleted": false,
+    "romanji": "Bangohan",
+    "hiragana/kanji": "晩ご飯",
+    "tradução": "Jantar",
+    "aula": 5
+  },
+  {
+    "id": 119,
+    "is_deleted": false,
+    "romanji": "Misoshiru",
+    "hiragana/kanji": "味噌汁",
+    "tradução": "Sopa de missô",
+    "aula": 5
+  },
+  {
+    "id": 120,
+    "is_deleted": false,
+    "romanji": "Tamago",
+    "hiragana/kanji": "卵",
+    "tradução": "Ovo",
+    "aula": 5
+  },
+  {
+    "id": 121,
+    "is_deleted": false,
+    "romanji": "Pan",
+    "hiragana/kanji": "パン",
+    "tradução": "Pão",
+    "aula": 5
+  },
+  {
+    "id": 122,
+    "is_deleted": false,
+    "romanji": "Sandoitchi",
+    "hiragana/kanji": "サンドイッチ",
+    "tradução": "Sanduíche",
+    "aula": 5
+  },
+  {
+    "id": 123,
+    "is_deleted": false,
+    "romanji": "Kareeraisu",
+    "hiragana/kanji": "カレーライス",
+    "tradução": "Curry com arroz",
+    "aula": 5
+  },
+  {
+    "id": 124,
+    "is_deleted": false,
+    "romanji": "Raamen",
+    "hiragana/kanji": "ラーメン",
+    "tradução": "Lamen",
+    "aula": 5
+  },
+  {
+    "id": 125,
+    "is_deleted": false,
+    "romanji": "Kudamono",
+    "hiragana/kanji": "果物",
+    "tradução": "Fruta",
+    "aula": 5
+  },
+  {
+    "id": 126,
+    "is_deleted": false,
+    "romanji": "Nomimono",
+    "hiragana/kanji": "飲み物",
+    "tradução": "Bebida",
+    "aula": 5
+  },
+  {
+    "id": 127,
+    "is_deleted": false,
+    "romanji": "Ocha",
+    "hiragana/kanji": "お茶",
+    "tradução": "Chá verde",
+    "aula": 5
+  },
+  {
+    "id": 128,
+    "is_deleted": false,
+    "romanji": "Koucha",
+    "hiragana/kanji": "紅茶",
+    "tradução": "Chá preto",
+    "aula": 5
+  },
+  {
+    "id": 129,
+    "is_deleted": false,
+    "romanji": "Kouhii",
+    "hiragana/kanji": "コーヒー",
+    "tradução": "Café",
+    "aula": 5
+  },
+  {
+    "id": 130,
+    "is_deleted": false,
+    "romanji": "Gyuunyuu",
+    "hiragana/kanji": "牛乳",
+    "tradução": "Leite",
+    "aula": 5
+  },
+  {
+    "id": 131,
+    "is_deleted": false,
+    "romanji": "Juusu",
+    "hiragana/kanji": "ジュース",
+    "tradução": "Suco",
+    "aula": 5
+  },
+  {
+    "id": 132,
+    "is_deleted": false,
+    "romanji": "Biiru",
+    "hiragana/kanji": "ビール",
+    "tradução": "Cerveja",
+    "aula": 5
+  },
+  {
+    "id": 133,
+    "is_deleted": false,
+    "romanji": "Tabemasu",
+    "hiragana/kanji": "食べます",
+    "tradução": "Comer",
+    "aula": 5
+  },
+  {
+    "id": 134,
+    "is_deleted": false,
+    "romanji": "Nomimasu",
+    "hiragana/kanji": "飲みます",
+    "tradução": "Beber",
+    "aula": 5
+  },
+  {
+    "id": 135,
+    "is_deleted": false,
+    "romanji": "Itsumo",
+    "hiragana/kanji": "いつも",
+    "tradução": "Sempre",
+    "aula": 5
+  },
+  {
+    "id": 136,
+    "is_deleted": false,
+    "romanji": "Yoku",
+    "hiragana/kanji": "よく",
+    "tradução": "Frequentemente / Muito",
+    "aula": 5
+  },
+  {
+    "id": 137,
+    "is_deleted": false,
+    "romanji": "Amari",
+    "hiragana/kanji": "あまり",
+    "tradução": "Pouco / Não muito (usado com verbo na negativa)",
+    "aula": 5
+  },
+  {
+    "id": 138,
+    "is_deleted": false,
+    "romanji": "Oishii",
+    "hiragana/kanji": "おいしい",
+    "tradução": "Gostoso / Delicioso",
+    "aula": 5
+  },
+  {
+    "id": 139,
+    "is_deleted": false,
+    "romanji": "Hanbaagaa",
+    "hiragana/kanji": "ハンバーガー",
+    "tradução": "Hambúrguer",
+    "aula": 6
+  },
+  {
+    "id": 140,
+    "is_deleted": false,
+    "romanji": "Chiizu-baagaa",
+    "hiragana/kanji": "チーズバーガー",
+    "tradução": "Hambúrguer com queijo / Cheeseburger",
+    "aula": 6
+  },
+  {
+    "id": 141,
+    "is_deleted": false,
+    "romanji": "Daburu-baagaa",
+    "hiragana/kanji": "ダブルバーガー",
+    "tradução": "Hambúrguer duplo",
+    "aula": 6
+  },
+  {
+    "id": 142,
+    "is_deleted": false,
+    "romanji": "Teriyaki-baagaa",
+    "hiragana/kanji": "てりやきバーガー",
+    "tradução": "Hambúrguer teriyaki",
+    "aula": 6
+  },
+  {
+    "id": 143,
+    "is_deleted": false,
+    "romanji": "Chikin-baagaa",
+    "hiragana/kanji": "チキンバーガー",
+    "tradução": "Hambúrguer de frango",
+    "aula": 6
+  },
+  {
+    "id": 144,
+    "is_deleted": false,
+    "romanji": "Furaido poteto",
+    "hiragana/kanji": "フライドポテト",
+    "tradução": "Batatas fritas",
+    "aula": 6
+  },
+  {
+    "id": 145,
+    "is_deleted": false,
+    "romanji": "Dezaato",
+    "hiragana/kanji": "デザート",
+    "tradução": "Sobremesa",
+    "aula": 6
+  },
+  {
+    "id": 146,
+    "is_deleted": false,
+    "romanji": "Aisu-kuriimu",
+    "hiragana/kanji": "アイスクリーム",
+    "tradução": "Gelado",
+    "aula": 6
+  },
+  {
+    "id": 147,
+    "is_deleted": false,
+    "romanji": "Appuru-pai",
+    "hiragana/kanji": "アップルパイ",
+    "tradução": "Tarte de maçã",
+    "aula": 6
+  },
+  {
+    "id": 148,
+    "is_deleted": false,
+    "romanji": "Tanpin",
+    "hiragana/kanji": "単品",
+    "tradução": "Dose individual / Avulso",
+    "aula": 6
+  },
+  {
+    "id": 149,
+    "is_deleted": false,
+    "romanji": "Setto",
+    "hiragana/kanji": "セット",
+    "tradução": "Menu (conjunto de refeição)",
+    "aula": 6
+  },
+  {
+    "id": 150,
+    "is_deleted": false,
+    "romanji": "Menyuu",
+    "hiragana/kanji": "メニュー",
+    "tradução": "Ementa / Menu",
+    "aula": 6
+  },
+  {
+    "id": 151,
+    "is_deleted": false,
+    "romanji": "Kudasai",
+    "hiragana/kanji": "ください",
+    "tradução": "Por favor (ao fazer um pedido)",
+    "aula": 6
+  },
+  {
+    "id": 152,
+    "is_deleted": false,
+    "romanji": "Oshibori",
+    "hiragana/kanji": "おしぼり",
+    "tradução": "Toalha húmida (para limpar as mãos)",
+    "aula": 6
+  },
+  {
+    "id": 153,
+    "is_deleted": false,
+    "romanji": "Omizu",
+    "hiragana/kanji": "お水",
+    "tradução": "Água (forma polida)",
+    "aula": 6
+  },
+  {
+    "id": 154,
+    "is_deleted": false,
+    "romanji": "Ohiya",
+    "hiragana/kanji": "おひや",
+    "tradução": "Água fria (servida gratuitamente nos restaurantes)",
+    "aula": 6
+  },
+  {
+    "id": 155,
+    "is_deleted": false,
+    "romanji": "Nama-biiru",
+    "hiragana/kanji": "生ビール",
+    "tradução": "Cerveja de pressão (fina)",
+    "aula": 6
+  },
+  {
+    "id": 156,
+    "is_deleted": false,
+    "romanji": "Mise",
+    "hiragana/kanji": "店",
+    "tradução": "Loja / Restaurante",
+    "aula": 6
+  },
+  {
+    "id": 157,
+    "is_deleted": false,
+    "romanji": "Soto",
+    "hiragana/kanji": "外",
+    "tradução": "Fora (comer fora)",
+    "aula": 6
+  },
+  {
+    "id": 158,
+    "is_deleted": false,
+    "romanji": "Shokuji",
+    "hiragana/kanji": "食事",
+    "tradução": "Refeição",
+    "aula": 6
   }
 ]
