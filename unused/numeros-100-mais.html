@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suuji - Centenas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&family=Noto+Serif+JP:wght@900&display=swap');
+
+        :root {
+            --bg: #f8f5f2; 
+            --ink: #2c2c2c; 
+            --accent: #bc002d; 
+            --card-bg: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { 
+            text-align: center; 
+            width: 100%; 
+            max-width: 380px; 
+            padding: 20px;
+        }
+
+        h2 { 
+            font-weight: 300; 
+            letter-spacing: 0.2rem; 
+            text-transform: uppercase; 
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            color: var(--ink);
+            opacity: 0.6;
+        }
+
+        .flashcard-wrapper {
+            perspective: 1200px;
+            width: 100%;
+            height: 320px;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped { transform: rotateY(180deg); }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px; 
+            background: var(--card-bg);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .back { 
+            transform: rotateY(180deg); 
+            background-color: var(--card-bg);
+        }
+
+        #num-display { 
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+            font-size: 5rem; 
+            margin: 0; 
+            color: var(--ink);
+        }
+
+        #txt-kanji { 
+            font-family: 'Noto Serif JP', serif;
+            font-size: 4.5rem; 
+            color: var(--accent);
+            line-height: 1.1;
+            transition: font-size 0.3s;
+        }
+
+        #txt-romaji { 
+            font-size: 1rem; 
+            margin-top: 15px; 
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+            opacity: 0.5;
+            text-align: center;
+        }
+
+        .nav-buttons { 
+            margin-top: 50px; 
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            background-color: var(--ink);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            letter-spacing: 0.15rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        small {
+            font-size: 0.7rem;
+            letter-spacing: 0.05rem;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Suuji • Centenas (100 - 999)</h2>
+        
+        <div class="flashcard-wrapper" onclick="this.querySelector('.flashcard').classList.toggle('flipped')">
+            <div class="flashcard" id="card">
+                <div class="front">
+                    <h1 id="num-display">100</h1>
+                    <small>Show Meaning</small>
+                </div>
+                <div class="back">
+                    <div id="txt-kanji">百</div>
+                    <div id="txt-romaji">hyaku</div>
+                    <small>Back</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button onclick="gerarNovoNumero()">Next Number</button>
+            <button class="btn-secondary" onclick="window.history.back()">Voltar</button>
+        </div>
+    </div>
+
+    <script>
+        const kanjiNumeros = { 1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九" };
+        const romajiNumeros = { 1: "ichi", 2: "ni", 3: "san", 4: "yon", 5: "go", 6: "roku", 7: "nana", 8: "hachi", 9: "kyuu" };
+
+        const centenasKanji = { 1: "百", 2: "二百", 3: "三百", 4: "四百", 5: "五百", 6: "六百", 7: "七百", 8: "八百", 9: "九百" };
+        const centenasRomaji = { 1: "hyaku", 2: "ni-hyaku", 3: "san-byaku", 4: "yon-hyaku", 5: "go-hyaku", 6: "rop-pyaku", 7: "nana-hyaku", 8: "hap-pyaku", 9: "kyuu-hyaku" };
+
+        // Lista pré-definida com 3 a 5 opções de cada centena
+        const poolNumeros = [
+            100, 105, 120, 150, 199,
+            200, 210, 234, 250, 290,
+            300, 305, 333, 350, 380,
+            400, 415, 444, 450, 495,
+            500, 505, 525, 550, 575,
+            600, 610, 650, 666, 690,
+            700, 707, 750, 777, 790,
+            800, 808, 850, 888, 890,
+            900, 911, 950, 990, 999
+        ];
+
+        let indexAtual = -1;
+
+        // Embaralha a lista ao carregar a página
+        poolNumeros.sort(() => Math.random() - 0.5);
+
+        function converterParaJapones(n) {
+            let centena = Math.floor(n / 100);
+            let resto = n % 100;
+            let dezenas = Math.floor(resto / 10);
+            let unidades = resto % 10;
+
+            let k = "";
+            let r = "";
+
+            // Centenas
+            if (centena > 0) {
+                k += centenasKanji[centena];
+                r += centenasRomaji[centena];
+            }
+
+            let kResto = "";
+            let rResto = "";
+
+            // Dezenas
+            if (dezenas > 0) {
+                if (dezenas > 1) { 
+                    kResto += kanjiNumeros[dezenas]; 
+                    rResto += romajiNumeros[dezenas] + "-"; 
+                }
+                kResto += "十"; 
+                rResto += "juu";
+            }
+
+            // Unidades
+            if (unidades > 0) {
+                kResto += kanjiNumeros[unidades];
+                rResto += (rResto ? "-" : "") + romajiNumeros[unidades];
+            }
+
+            k += kResto;
+            // Adiciona um espaço entre a centena e o resto, se houver resto
+            if (rResto) {
+                r += (r ? " " : "") + rResto;
+            }
+
+            return { kanji: k, romaji: r };
+        }
+
+        function gerarNovoNumero() {
+            const card = document.getElementById('card');
+            card.classList.remove('flipped');
+
+            setTimeout(() => {
+                indexAtual = (indexAtual + 1) % poolNumeros.length;
+                const num = poolNumeros[indexAtual];
+                const info = converterParaJapones(num);
+                
+                const txtKanji = document.getElementById('txt-kanji');
+                
+                // Diminui o tamanho da fonte se o Kanji for muito longo
+                if(info.kanji.length >= 4) {
+                    txtKanji.style.fontSize = "3rem";
+                } else if(info.kanji.length === 3) {
+                    txtKanji.style.fontSize = "3.8rem";
+                } else {
+                    txtKanji.style.fontSize = "4.5rem";
+                }
+
+                document.getElementById('num-display').innerText = num;
+                txtKanji.innerText = info.kanji;
+                document.getElementById('txt-romaji').innerText = info.romaji;
+            }, 200);
+        }
+
+        gerarNovoNumero();
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katakana — Kana Trainer</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <aside id="stats-panel" class="stats-panel" aria-live="polite">
+    <div class="stats-label">Erros</div>
+    <span id="error-count" class="stats-count">0</span>
+    <div id="error-list" class="stats-list"></div>
+  </aside>
+
+  <div class="page-wrap">
+    <header class="topbar">
+      <a href="index.html" class="back">← voltar</a>
+      <div class="title"><span class="jp">カタカナ</span>Katakana</div>
+      <span style="width:60px"></span>
+    </header>
+
+    <section id="setup">
+      <h2>Selecione os caracteres</h2>
+
+      <div class="selection-controls">
+        <button class="btn-mini" onclick="toggleAll('table-container', true)">Todos</button>
+        <button class="btn-mini" onclick="toggleAll('table-container', false)">Nenhum</button>
+      </div>
+
+      <div id="table-container"></div>
+
+      <div class="center">
+        <button id="start-btn" class="btn-primary">Iniciar treino</button>
+      </div>
+    </section>
+
+    <section id="trainer" class="trainer">
+      <hr class="hr-thin">
+      <div id="kana-display" class="kana-display"></div>
+      <input id="answer-input" class="answer-input" placeholder="romaji…" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <p id="feedback" class="feedback"></p>
+    </section>
+  </div>
+
+  <script src="assets/kana.js"></script>
+  <script>
+    const container = document.getElementById("table-container");
+    buildSelectionTable(container, KATAKANA_TABLE);
+
+    const setupSection = document.getElementById("setup");
+    const startBtn = document.getElementById("start-btn");
+
+    createTrainer({
+      source: () => [...container.querySelectorAll('input:checked')].map(x => x.value),
+      displayEl: document.getElementById("kana-display"),
+      inputEl:   document.getElementById("answer-input"),
+      feedbackEl: document.getElementById("feedback"),
+      statsEl:   document.getElementById("stats-panel"),
+      countEl:   document.getElementById("error-count"),
+      listEl:    document.getElementById("error-list"),
+      startBtn,
+      controlsToHide: [setupSection]
+    });
+  </script>
+</body>
+</html>

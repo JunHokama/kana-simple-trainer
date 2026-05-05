@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700;900&display=swap');
+
+:root {
+  --bg:        #f8f5f2;
+  --ink:       #1a1a1a;
+  --ink-soft:  #5c5c5c;
+  --line:      #d9d4cc;
+  --accent:    #bc002d;
+  --card:      #ffffff;
+  --ok:        #2e7d32;
+  --err:       #bc002d;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', system-ui, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- HOME ---------- */
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.mark {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-bottom: 36px;
+  opacity: 0.9;
+}
+
+.brand {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 900;
+  font-size: clamp(64px, 12vw, 128px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin: 0 0 12px;
+}
+
+.brand-sub {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+
+.tagline {
+  font-size: 15px;
+  color: var(--ink-soft);
+  max-width: 460px;
+  line-height: 1.7;
+  margin: 0 0 56px;
+}
+
+.divider {
+  width: 1px;
+  height: 48px;
+  background: var(--line);
+  margin: 0 auto 48px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: min(360px, 100%);
+  border-top: 1px solid var(--line);
+}
+
+.menu a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 4px;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  transition: padding 0.25s ease, color 0.25s ease;
+}
+
+.menu a:hover {
+  padding-left: 12px;
+  padding-right: 12px;
+  color: var(--accent);
+}
+
+.menu a .jp {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.menu a .arrow {
+  color: var(--line);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.menu a:hover .arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+/* ---------- TRAINER PAGES ---------- */
+.page-wrap {
+  min-height: 100vh;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+
+.topbar .back {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  transition: color 0.2s;
+}
+
+.topbar .back:hover { color: var(--accent); }
+
+.topbar .title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+}
+
+.topbar .title .jp {
+  color: var(--accent);
+  margin-right: 8px;
+}
+
+h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0 0 24px;
+  text-align: center;
+  color: var(--ink);
+}
+
+/* Selection table */
+.selection-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.btn-mini {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  padding: 8px 16px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.btn-mini:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.kana-table {
+  margin: 0 auto 32px;
+  border-collapse: collapse;
+  background: var(--card);
+}
+
+.kana-table th, .kana-table td {
+  border: 1px solid var(--line);
+  padding: 6px 4px;
+  text-align: center;
+  min-width: 56px;
+  font-size: 14px;
+}
+
+.kana-table th {
+  background: var(--bg);
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+}
+
+.kana-table td label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px 2px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 22px;
+  transition: background 0.15s;
+}
+
+.kana-table td label:hover { background: var(--bg); }
+
+.kana-table input[type="checkbox"] {
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.center { text-align: center; }
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 14px 36px;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover { background: var(--accent); }
+.btn-primary:active { transform: translateY(1px); }
+
+/* Trainer */
+.trainer { display: none; margin-top: 48px; }
+.trainer.active { display: block; }
+
+.kana-display {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: clamp(140px, 22vw, 220px);
+  text-align: center;
+  line-height: 1;
+  margin: 24px 0 32px;
+  color: var(--ink);
+  user-select: none;
+}
+
+.answer-input {
+  display: block;
+  width: 240px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 18px;
+  font-family: inherit;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.answer-input:focus { border-bottom-color: var(--accent); }
+
+.feedback {
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  margin-top: 20px;
+  height: 22px;
+  color: var(--ink-soft);
+}
+
+.feedback.ok  { color: var(--ok); }
+.feedback.err { color: var(--err); }
+
+.hr-thin {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 32px 0;
+}
+
+/* Stats panel */
+.stats-panel {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;
+  padding: 16px 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  text-align: center;
+  display: none;
+  z-index: 100;
+}
+
+.stats-panel.active { display: block; }
+
+.stats-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.stats-count {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.stats-list {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px;
+  color: var(--ink);
+  word-wrap: break-word;
+  line-height: 1.5;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  min-height: 24px;
+}
+
+@media (max-width: 720px) {
+  .stats-panel {
+    position: static;
+    transform: none;
+    width: auto;
+    margin: 24px auto 0;
+    max-width: 360px;
+  }
+  .kana-table th, .kana-table td { min-width: 44px; padding: 4px 2px; }
+  .kana-table td label { font-size: 18px; }
+}
