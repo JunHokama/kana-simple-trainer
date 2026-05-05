@@ -35,7 +35,28 @@
       </a>
     </nav>
 
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="pix-section">
+      <p class="pix-label">Se o site te ajudou, um café ajuda a manter o projeto</p>
+      <img src="assets/pix-qr.png" alt="QR Code Pix" class="pix-qr">
+      <div class="pix-key-wrap">
+        <span id="pix-key" class="pix-key">dee7f52a-c306-42f2-8279-3b3c446e0620</span>
+        <button class="pix-copy" onclick="copyPix()">Copiar chave</button>
+      </div>
+      <p id="pix-copied" class="pix-copied"></p>
+    </section>
+
     <p class="footer">日本語 · かな · 練習</p>
   </main>
+
+  <script>
+    function copyPix() {
+      navigator.clipboard.writeText(document.getElementById('pix-key').textContent);
+      const el = document.getElementById('pix-copied');
+      el.textContent = '正解 — Copiado!';
+      setTimeout(() => el.textContent = '', 2000);
+    }
+  </script>
 </body>
 </html>
