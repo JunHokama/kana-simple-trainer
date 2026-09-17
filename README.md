@@ -27,4 +27,4 @@ Sem login. Sem anúncios. Sem distrações.
 
 ## Stack
 
-Vanilla HTML + CSS + JS — sem frameworks, sem dependências, sem build.
+Vanilla HTML + CSS + JS — sem frameworks, sem dependências, sem build
